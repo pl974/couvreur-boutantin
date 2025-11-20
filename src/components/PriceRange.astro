@@ -1,0 +1,248 @@
+---
+/**
+ * Composant PriceRange - Fourchettes de prix indicatives
+ * Affiche les tarifs approximatifs pour transparence
+ */
+
+interface PriceItem {
+  service: string;
+  priceRange: string;
+  description: string;
+  features: string[];
+}
+
+interface Props {
+  title?: string;
+  items?: PriceItem[];
+  disclaimer?: string;
+}
+
+const defaultItems: PriceItem[] = [
+  {
+    service: 'Reparation simple',
+    priceRange: '150 - 500',
+    description: 'Remplacement de quelques tuiles',
+    features: [
+      'Diagnostic inclus',
+      'Remplacement tuiles',
+      'Garantie 2 ans'
+    ]
+  },
+  {
+    service: 'Demoussage',
+    priceRange: '12 - 18',
+    description: 'Par m2, traitement hydrofuge inclus',
+    features: [
+      'Nettoyage complet',
+      'Traitement anti-mousse',
+      'Protection longue duree'
+    ]
+  },
+  {
+    service: 'Renovation toiture',
+    priceRange: '80 - 150',
+    description: 'Par m2, materiel et pose',
+    features: [
+      'Depose ancienne toiture',
+      'Nouvelle couverture',
+      'Garantie decennale'
+    ]
+  }
+];
+
+const {
+  title = 'Tarifs indicatifs',
+  items = defaultItems,
+  disclaimer = 'Prix indicatifs hors taxe. Devis personnalise gratuit apres diagnostic sur place.'
+} = Astro.props;
+---
+
+<section class="price-range-section">
+  <div class="container">
+    <div class="section-title">
+      <h2>{title}</h2>
+      <p>Transparence totale sur nos tarifs</p>
+    </div>
+
+    <div class="price-grid">
+      {items.map((item, index) => (
+        <div class="price-card" data-index={index}>
+          <div class="price-header">
+            <h3>{item.service}</h3>
+            <div class="price">
+              <span class="amount">{item.priceRange}</span>
+              <span class="currency">EUR</span>
+            </div>
+            <p class="price-description">{item.description}</p>
+          </div>
+          <ul class="price-features">
+            {item.features.map(feature => (
+              <li>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    {disclaimer && (
+      <div class="price-disclaimer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="16" x2="12" y2="12"/>
+          <line x1="12" y1="8" x2="12.01" y2="8"/>
+        </svg>
+        <p>{disclaimer}</p>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .price-range-section {
+    padding: var(--spacing-3xl) 0;
+    background-color: var(--color-gray-50);
+  }
+
+  .price-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .price-card {
+    background-color: var(--color-white);
+    border: 2px solid var(--color-gray-200);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    transition: all var(--transition-base);
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .price-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .price-card:hover {
+    border-color: var(--color-secondary);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+  }
+
+  .price-header {
+    text-align: center;
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-gray-200);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .price-header h3 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-primary);
+  }
+
+  .price {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .amount {
+    font-family: var(--font-heading);
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    color: var(--color-gray-900);
+  }
+
+  .currency {
+    font-size: var(--text-lg);
+    color: var(--color-gray-500);
+    margin-left: var(--spacing-xs);
+  }
+
+  .price-description {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+    margin: 0;
+  }
+
+  .price-features {
+    list-style: none;
+    padding: 0;
+  }
+
+  .price-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-xs) 0;
+    font-size: var(--text-sm);
+    color: var(--color-gray-700);
+  }
+
+  .price-features svg {
+    flex-shrink: 0;
+    color: var(--color-secondary);
+    margin-top: 2px;
+  }
+
+  .price-disclaimer {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background-color: var(--color-white);
+    border-left: 4px solid var(--color-secondary);
+    border-radius: var(--radius-md);
+  }
+
+  .price-disclaimer svg {
+    flex-shrink: 0;
+    color: var(--color-secondary);
+    margin-top: 2px;
+  }
+
+  .price-disclaimer p {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .price-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  const observerOptions = {
+    threshold: 0.2,
+    rootMargin: '0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const card = entry.target as HTMLElement;
+        const index = parseInt(card.dataset.index || '0');
+
+        setTimeout(() => {
+          card.classList.add('visible');
+        }, index * 100);
+
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.price-card').forEach((card) => {
+    observer.observe(card);
+  });
+</script>

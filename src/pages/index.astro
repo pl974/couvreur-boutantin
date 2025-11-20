@@ -7,12 +7,18 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import TrustBadges from '../components/TrustBadges.astro';
+import Stats from '../components/Stats.astro';
 import ServiceCard from '../components/ServiceCard.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
 import CityCard from '../components/CityCard.astro';
+import Gallery from '../components/Gallery.astro';
 import Testimonial from '../components/Testimonial.astro';
+import PriceRange from '../components/PriceRange.astro';
 import FAQ from '../components/FAQ.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Button from '../components/Button.astro';
+import CTAFloat from '../components/CTAFloat.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
 import { services, cities } from '../utils/seo';
 
 const faqItems = [
@@ -58,6 +64,27 @@ const testimonials = [
     rating: 5
   }
 ];
+
+const galleryItems = [
+  {
+    before: '/images/gallery/realisation-01-avant.webp',
+    after: '/images/gallery/realisation-01-apres.webp',
+    title: 'Renovation complete toiture',
+    description: 'Remplacement total de la couverture avec nouvelles tuiles. Maison a Dunkerque.'
+  },
+  {
+    before: '/images/gallery/realisation-02-avant.webp',
+    after: '/images/gallery/realisation-02-apres.webp',
+    title: 'Demoussage professionnel',
+    description: 'Nettoyage et traitement hydrofuge. Villa a Calais.'
+  },
+  {
+    before: '/images/gallery/realisation-03-avant.webp',
+    after: '/images/gallery/realisation-03-apres.webp',
+    title: 'Reparation zinguerie',
+    description: 'Remplacement gouttieres et faitages. Maison a Gravelines.'
+  }
+];
 ---
 
 <BaseLayout
@@ -73,6 +100,9 @@ const testimonials = [
 
   <!-- Badges de confiance -->
   <TrustBadges />
+
+  <!-- Section Statistiques -->
+  <Stats />
 
   <!-- Section Services -->
   <section class="section services-section">
@@ -103,6 +133,9 @@ const testimonials = [
       </div>
     </div>
   </section>
+
+  <!-- Section Processus -->
+  <ProcessSteps />
 
   <!-- Section Pourquoi nous choisir -->
   <section class="section why-section">
@@ -157,6 +190,9 @@ const testimonials = [
     </div>
   </section>
 
+  <!-- Section Realisations -->
+  <Gallery items={galleryItems} />
+
   <!-- Section Zones d'intervention -->
   <section class="section zones-section">
     <div class="container">
@@ -186,6 +222,9 @@ const testimonials = [
       </div>
     </div>
   </section>
+
+  <!-- Section Tarifs indicatifs -->
+  <PriceRange />
 
   <!-- Section Temoignages -->
   <section class="section testimonials-section">
@@ -329,6 +368,10 @@ const testimonials = [
       </p>
     </div>
   </section>
+
+  <!-- CTA Flottant et WhatsApp -->
+  <CTAFloat />
+  <WhatsAppButton />
 </BaseLayout>
 
 <style>
