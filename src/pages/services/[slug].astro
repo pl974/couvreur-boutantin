@@ -1,0 +1,457 @@
+---
+/**
+ * Template dynamique pour les pages de services
+ * Genere une page pour chaque service
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import FAQ from '../../components/FAQ.astro';
+import Button from '../../components/Button.astro';
+import { services, generateServiceSchema } from '../../utils/seo';
+
+export function getStaticPaths() {
+  return services.map(service => ({
+    params: { slug: service.slug },
+    props: { service }
+  }));
+}
+
+const { service } = Astro.props;
+
+// FAQ specifiques par service
+const serviceFAQs: Record<string, Array<{question: string; answer: string}>> = {
+  'reparation-toiture': [
+    {
+      question: "Combien coute une reparation de toiture ?",
+      answer: "Le cout varie selon l'etendue des degats. Une petite reparation (quelques tuiles) coute entre 150 et 500 euros. Pour des degats plus importants, comptez entre 500 et 2000 euros. Nous proposons un devis gratuit apres diagnostic."
+    },
+    {
+      question: "Intervenez-vous en urgence pour les fuites ?",
+      answer: "Oui, nous proposons un service d'urgence pour les fuites de toiture. Nous pouvons intervenir rapidement pour bacher et securiser votre toit en attendant la reparation definitive."
+    },
+    {
+      question: "Les reparations sont-elles garanties ?",
+      answer: "Oui, toutes nos reparations sont couvertes par notre garantie decennale. Nous utilisons des materiaux de qualite pour assurer la perennite des travaux."
+    }
+  ],
+  'renovation-toiture': [
+    {
+      question: "Quand faut-il renover sa toiture ?",
+      answer: "Une renovation s'impose generalement apres 30-50 ans selon le type de couverture, ou en cas de fuites repetees, de deformation de la charpente, ou pour ameliorer l'isolation thermique."
+    },
+    {
+      question: "Combien de temps dure une renovation complete ?",
+      answer: "La duree depend de la surface et des travaux. Comptez 1 a 2 semaines pour une maison individuelle standard. Nous vous communiquons un planning precis lors du devis."
+    },
+    {
+      question: "Peut-on rester dans la maison pendant les travaux ?",
+      answer: "Oui, dans la plupart des cas vous pouvez rester chez vous. Nous prenons toutes les precautions pour limiter les nuisances et proteger votre interieur."
+    }
+  ],
+  'demoussage': [
+    {
+      question: "A quelle frequence demousser sa toiture ?",
+      answer: "Nous recommandons un demoussage tous les 3 a 5 ans selon l'exposition de votre toiture et la presence de vegetation a proximite. Un entretien regulier prolonge la vie de votre couverture."
+    },
+    {
+      question: "Le traitement anti-mousse est-il efficace ?",
+      answer: "Oui, nous appliquons des produits professionnels qui empechent la repousse des mousses et lichens pendant plusieurs annees. Le traitement hydrofuge protege egalement vos tuiles."
+    },
+    {
+      question: "Est-ce que le demoussage abime les tuiles ?",
+      answer: "Non, nous utilisons des techniques douces (pas de nettoyage haute pression excessif) qui preservent l'integrite de vos tuiles tout en eliminant efficacement les vegetaux."
+    }
+  ],
+  'zinguerie': [
+    {
+      question: "Comment savoir si mes gouttieres sont a changer ?",
+      answer: "Les signes d'usure incluent : fuites aux jonctions, debordements, rouille, deformations ou mauvaise evacuation de l'eau. Une inspection permet de determiner si une reparation suffit ou s'il faut remplacer."
+    },
+    {
+      question: "Quel materiau choisir pour les gouttieres ?",
+      answer: "Le zinc est le plus courant pour sa durabilite (40-50 ans) et son esthetique. L'aluminium est plus economique, le cuivre plus noble mais plus cher. Nous vous conseillons selon votre budget et votre style de maison."
+    },
+    {
+      question: "Faites-vous l'entretien des gouttieres ?",
+      answer: "Oui, nous proposons un service de nettoyage et verification des gouttieres. Un entretien annuel evite les obstructions et les debordements qui peuvent endommager vos facades."
+    }
+  ],
+  'isolation': [
+    {
+      question: "Quelles aides pour l'isolation de toiture ?",
+      answer: "En tant qu'artisan RGE, nos travaux sont eligibles a MaPrimeRenov', aux CEE, a l'eco-PTZ et aux aides locales. Le montant depend de vos revenus et des travaux realises. Nous vous accompagnons dans les demarches."
+    },
+    {
+      question: "Quelle epaisseur d'isolant pour les combles ?",
+      answer: "Pour une isolation performante, nous recommandons une resistance thermique R superieure ou egale a 7 m2.K/W, soit environ 30 cm de laine minerale ou 26 cm de ouate de cellulose."
+    },
+    {
+      question: "Isolation par l'interieur ou par l'exterieur ?",
+      answer: "L'isolation par l'interieur (sous rampants ou plancher des combles) est plus economique. L'isolation par l'exterieur (sarking) est plus performante mais plus couteuse. Nous vous conseillons la meilleure solution selon votre situation."
+    }
+  ],
+  'urgence': [
+    {
+      question: "Sous quel delai intervenez-vous en urgence ?",
+      answer: "Nous nous efforcons d'intervenir dans les 24 a 48h suivant votre appel pour les urgences (fuites importantes, degats suite a tempete). Pour les situations critiques, nous pouvons intervenir le jour meme."
+    },
+    {
+      question: "Que faire en attendant l'intervention ?",
+      answer: "En cas de fuite, placez des recipients pour recueillir l'eau et protegez vos affaires. Si possible, montez dans les combles pour identifier l'origine de la fuite. Ne montez jamais sur le toit vous-meme."
+    },
+    {
+      question: "L'assurance prend-elle en charge les reparations ?",
+      answer: "Les degats causes par les tempetes et catastrophes naturelles sont generalement couverts par votre assurance habitation. Nous vous fournissons tous les documents necessaires pour votre dossier de sinistre."
+    }
+  ]
+};
+
+const faqItems = serviceFAQs[service.slug] || [
+  {
+    question: "Proposez-vous des devis gratuits ?",
+    answer: "Oui, nous proposons des devis gratuits et sans engagement pour tous nos services. Contactez-nous pour une evaluation de vos besoins."
+  },
+  {
+    question: "Quelle est votre zone d'intervention ?",
+    answer: "Nous intervenons sur Dunkerque et toutes les communes du littoral nord dans un rayon de 30 km."
+  },
+  {
+    question: "Vos travaux sont-ils garantis ?",
+    answer: "Oui, tous nos travaux sont couverts par notre garantie decennale et notre assurance responsabilite civile professionnelle."
+  }
+];
+
+const structuredData = generateServiceSchema({
+  name: service.name,
+  description: service.description,
+  url: `https://couvreur-boutantin.fr/services/${service.slug}/`
+});
+---
+
+<BaseLayout
+  title={service.title}
+  description={service.description}
+  structuredData={structuredData}
+>
+  <section class="page-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="service-icon" set:html={service.icon} />
+        <h1>{service.title}</h1>
+        <p>{service.shortDescription}</p>
+        <div class="header-cta">
+          <Button href="tel:+33328000000" variant="primary" size="lg">
+            Appeler maintenant
+          </Button>
+          <Button href="#devis" variant="outline" size="lg">
+            Demander un devis
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="content-grid">
+        <div class="main-content">
+          <h2>Notre service de {service.name.toLowerCase()}</h2>
+
+          <p>
+            Specialistes de la {service.name.toLowerCase()} depuis plus de 15 ans, nous
+            intervenons sur Dunkerque et tout le littoral nord pour repondre a vos besoins.
+            Notre equipe de couvreurs qualifies met son expertise a votre service pour
+            des travaux de qualite, realises dans les regles de l'art.
+          </p>
+
+          <h3>Pourquoi nous choisir pour votre {service.name.toLowerCase()} ?</h3>
+
+          <ul class="benefits-list">
+            <li>
+              <strong>Expertise reconnue</strong> - Plus de 15 ans d'experience dans la
+              couverture et la {service.name.toLowerCase()}
+            </li>
+            <li>
+              <strong>Artisan certifie</strong> - Certification RGE Qualibat garantissant
+              la qualite de nos interventions
+            </li>
+            <li>
+              <strong>Reactivite</strong> - Devis gratuit sous 24h et planning d'intervention
+              rapide
+            </li>
+            <li>
+              <strong>Garanties</strong> - Garantie decennale et assurance RC Pro pour votre
+              tranquillite
+            </li>
+            <li>
+              <strong>Transparence</strong> - Devis detaille et explications claires sur
+              les travaux
+            </li>
+          </ul>
+
+          <h3>Comment se deroule une intervention ?</h3>
+
+          <ol class="steps-list">
+            <li>
+              <strong>Contact et rendez-vous</strong> - Appelez-nous ou remplissez le
+              formulaire. Nous convenons d'un rendez-vous pour evaluer vos besoins.
+            </li>
+            <li>
+              <strong>Diagnostic et devis</strong> - Nous realisons un diagnostic complet
+              et vous remettons un devis detaille gratuit.
+            </li>
+            <li>
+              <strong>Planification</strong> - Une fois le devis accepte, nous planifions
+              l'intervention selon vos disponibilites.
+            </li>
+            <li>
+              <strong>Realisation</strong> - Nos couvreurs realisent les travaux avec soin,
+              dans le respect des delais annonces.
+            </li>
+            <li>
+              <strong>Verification</strong> - Nous verifions ensemble la qualite des travaux
+              et vous remettons les documents de garantie.
+            </li>
+          </ol>
+
+          <h3>Nos engagements qualite</h3>
+
+          <p>
+            Chez Couvreur Boutantin, la satisfaction client est notre priorite. Nous nous
+            engageons a vous fournir un travail soigne, des materiaux de qualite et un
+            service irreprochable. Notre equipe prend soin de votre propriete et laisse
+            le chantier propre apres intervention.
+          </p>
+        </div>
+
+        <aside class="sidebar">
+          <div class="contact-box" id="devis">
+            <ContactForm compact={true} title="Devis gratuit" />
+          </div>
+
+          <div class="info-box">
+            <h4>Besoin d'une intervention rapide ?</h4>
+            <p>Appelez-nous directement :</p>
+            <a href="tel:+33328000000" class="phone-link">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              03 28 00 00 00
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq-section">
+    <div class="container">
+      <FAQ items={faqItems} title={`Questions frequentes sur la ${service.name.toLowerCase()}`} />
+    </div>
+  </section>
+
+  <section class="section cta-section">
+    <div class="container">
+      <div class="final-cta">
+        <h2>Pret a demarrer votre projet ?</h2>
+        <p>
+          Contactez-nous des maintenant pour obtenir votre devis gratuit.
+          Notre equipe vous repond sous 24h.
+        </p>
+        <div class="cta-buttons">
+          <Button href="tel:+33328000000" variant="primary" size="lg">
+            Appeler le 03 28 00 00 00
+          </Button>
+          <Button href="/contact/" variant="secondary" size="lg">
+            Formulaire de contact
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--spacing-3xl) 0;
+    text-align: center;
+  }
+
+  .header-content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .service-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--spacing-lg);
+    color: var(--color-secondary);
+  }
+
+  .service-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .page-header h1 {
+    color: var(--color-white);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .page-header p {
+    color: var(--color-gray-200);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .header-cta {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+
+  .header-cta .btn-outline {
+    border-color: var(--color-white);
+    color: var(--color-white);
+  }
+
+  .header-cta .btn-outline:hover {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: var(--spacing-3xl);
+    align-items: start;
+  }
+
+  .main-content h2 {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .main-content h3 {
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .main-content p {
+    color: var(--color-gray-700);
+    line-height: 1.8;
+  }
+
+  .benefits-list,
+  .steps-list {
+    padding-left: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+  }
+
+  .benefits-list li,
+  .steps-list li {
+    padding: var(--spacing-sm) 0;
+    color: var(--color-gray-700);
+    line-height: 1.6;
+  }
+
+  .benefits-list strong,
+  .steps-list strong {
+    color: var(--color-gray-900);
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 100px;
+  }
+
+  .contact-box {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+  }
+
+  .info-box {
+    background-color: var(--color-gray-50);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    text-align: center;
+  }
+
+  .info-box h4 {
+    font-size: var(--text-base);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .info-box p {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .phone-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .phone-link:hover {
+    color: var(--color-secondary);
+  }
+
+  .faq-section {
+    background-color: var(--color-gray-50);
+  }
+
+  .cta-section {
+    background-color: var(--color-primary);
+  }
+
+  .final-cta {
+    text-align: center;
+    color: var(--color-white);
+  }
+
+  .final-cta h2 {
+    color: var(--color-white);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .final-cta p {
+    color: var(--color-gray-200);
+    margin-bottom: var(--spacing-xl);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 1024px) {
+    .content-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      position: static;
+    }
+
+    .contact-box {
+      max-width: 500px;
+    }
+  }
+</style>

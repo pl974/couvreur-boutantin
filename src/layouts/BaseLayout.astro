@@ -1,0 +1,154 @@
+---
+/**
+ * Layout de base - Structure HTML principale avec SEO optimise
+ * Utilise sur toutes les pages du site
+ */
+
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  structuredData?: object;
+}
+
+const {
+  title,
+  description,
+  canonical = Astro.url.href,
+  ogImage = '/images/og-default.webp',
+  noindex = false,
+  structuredData
+} = Astro.props;
+
+const siteName = 'Couvreur Boutantin';
+const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
+
+// Schema LocalBusiness par defaut
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "RoofingContractor",
+  "name": "Couvreur Boutantin",
+  "description": "Artisan couvreur professionnel a Dunkerque. Reparation, renovation et entretien de toiture dans le Nord.",
+  "url": "https://couvreur-boutantin.fr",
+  "telephone": "+33328000000",
+  "email": "contact@couvreur-boutantin.fr",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Dunkerque",
+    "addressLocality": "Dunkerque",
+    "postalCode": "59140",
+    "addressCountry": "FR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 51.0343,
+    "longitude": 2.3768
+  },
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Dunkerque"
+    },
+    {
+      "@type": "City",
+      "name": "Calais"
+    },
+    {
+      "@type": "City",
+      "name": "Gravelines"
+    },
+    {
+      "@type": "City",
+      "name": "Grande-Synthe"
+    }
+  ],
+  "priceRange": "$$",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "08:00",
+      "closes": "18:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "09:00",
+      "closes": "12:00"
+    }
+  ]
+};
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Meta -->
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={siteName} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+  <meta property="og:locale" content="fr_FR" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+
+  <!-- Schema Markup -->
+  <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+  {structuredData && (
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  )}
+</head>
+<body>
+  <Header currentPath={Astro.url.pathname} />
+
+  <main id="main-content">
+    <slot />
+  </main>
+
+  <Footer />
+
+  <!-- Schema BreadcrumbList dynamique -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Accueil",
+        "item": "https://couvreur-boutantin.fr"
+      }
+    ]
+  })} />
+</body>
+</html>

@@ -1,0 +1,200 @@
+---
+/**
+ * Composant Footer
+ * Pied de page avec liens, informations de contact et SEO local
+ */
+
+const currentYear = new Date().getFullYear();
+
+const services = [
+  { href: '/services/reparation-toiture/', label: 'Reparation toiture' },
+  { href: '/services/renovation-toiture/', label: 'Renovation toiture' },
+  { href: '/services/demoussage/', label: 'Demoussage' },
+  { href: '/services/zinguerie/', label: 'Zinguerie' },
+  { href: '/services/isolation/', label: 'Isolation toiture' }
+];
+
+const zones = [
+  { href: '/zones/dunkerque/', label: 'Dunkerque' },
+  { href: '/zones/calais/', label: 'Calais' },
+  { href: '/zones/gravelines/', label: 'Gravelines' },
+  { href: '/zones/grande-synthe/', label: 'Grande-Synthe' },
+  { href: '/zones/coudekerque/', label: 'Coudekerque-Branche' }
+];
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="logo-text">Couvreur</span>
+          <span class="logo-accent">Boutantin</span>
+        </div>
+        <p class="footer-desc">
+          Votre artisan couvreur de confiance a Dunkerque et dans le Nord.
+          Plus de 15 ans d'experience au service de votre toiture.
+        </p>
+        <div class="footer-contact">
+          <p>
+            <strong>Telephone :</strong>
+            <a href="tel:+33328000000">03 28 00 00 00</a>
+          </p>
+          <p>
+            <strong>Email :</strong>
+            <a href="mailto:contact@couvreur-boutantin.fr">contact@couvreur-boutantin.fr</a>
+          </p>
+          <p>
+            <strong>Adresse :</strong>
+            Dunkerque, 59140
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <h3>Nos services</h3>
+        <ul>
+          {services.map(link => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="footer-nav">
+        <h3>Zones d'intervention</h3>
+        <ul>
+          {zones.map(link => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="footer-nav">
+        <h3>Informations</h3>
+        <ul>
+          <li><a href="/mentions-legales/">Mentions legales</a></li>
+          <li><a href="/politique-confidentialite/">Politique de confidentialite</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {currentYear} Couvreur Boutantin - Tous droits reserves</p>
+      <p>Artisan couvreur a Dunkerque - RGE Qualibat</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--color-primary);
+    color: var(--color-gray-200);
+    padding: var(--spacing-3xl) 0 var(--spacing-lg);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .footer-logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .footer-logo .logo-text {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-white);
+  }
+
+  .footer-logo .logo-accent {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .footer-desc {
+    font-size: var(--text-sm);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.7;
+  }
+
+  .footer-contact p {
+    font-size: var(--text-sm);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .footer-contact a {
+    color: var(--color-secondary-light);
+  }
+
+  .footer-contact a:hover {
+    color: var(--color-secondary);
+  }
+
+  .footer-nav h3 {
+    font-size: var(--text-base);
+    color: var(--color-white);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .footer-nav ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-nav li {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .footer-nav a {
+    font-size: var(--text-sm);
+    color: var(--color-gray-300);
+    transition: color var(--transition-fast);
+  }
+
+  .footer-nav a:hover {
+    color: var(--color-secondary);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid var(--color-primary-light);
+    padding-top: var(--spacing-lg);
+    text-align: center;
+  }
+
+  .footer-bottom p {
+    font-size: var(--text-sm);
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-gray-400);
+  }
+
+  @media (max-width: 1024px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-brand {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-brand {
+      grid-column: span 1;
+    }
+  }
+</style>

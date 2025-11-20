@@ -1,0 +1,114 @@
+---
+/**
+ * Composant Button réutilisable
+ * Props:
+ * - variant: 'primary' | 'secondary' | 'outline' (défaut: 'primary')
+ * - size: 'sm' | 'md' | 'lg' (défaut: 'md')
+ * - href: string (optionnel, transforme en lien)
+ * - type: 'button' | 'submit' (défaut: 'button')
+ * - fullWidth: boolean (défaut: false)
+ */
+
+interface Props {
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  type?: 'button' | 'submit';
+  fullWidth?: boolean;
+  class?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  type = 'button',
+  fullWidth = false,
+  class: className = ''
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+const attrs = href ? { href } : { type };
+---
+
+<Tag
+  class:list={['btn', `btn-${variant}`, `btn-${size}`, { 'btn-full': fullWidth }, className]}
+  {...attrs}
+>
+  <slot />
+</Tag>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    font-weight: 600;
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .btn:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  /* Variants */
+  .btn-primary {
+    background-color: var(--color-secondary);
+    color: var(--color-gray-900);
+    border-color: var(--color-secondary);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-secondary-dark);
+    border-color: var(--color-secondary-dark);
+  }
+
+  .btn-secondary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+  }
+
+  .btn-outline {
+    background-color: transparent;
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  /* Sizes */
+  .btn-sm {
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: var(--text-sm);
+  }
+
+  .btn-md {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: var(--text-base);
+  }
+
+  .btn-lg {
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: var(--text-lg);
+  }
+
+  .btn-full {
+    width: 100%;
+  }
+</style>

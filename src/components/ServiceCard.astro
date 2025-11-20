@@ -1,0 +1,93 @@
+---
+/**
+ * Composant ServiceCard - Carte de service réutilisable
+ * Pour afficher les différents services de couvreur
+ */
+
+interface Props {
+  title: string;
+  description: string;
+  icon: string;
+  href: string;
+}
+
+const { title, description, icon, href } = Astro.props;
+---
+
+<article class="service-card">
+  <a href={href} class="service-link">
+    <div class="service-icon" set:html={icon} />
+    <h3>{title}</h3>
+    <p>{description}</p>
+    <span class="service-cta">
+      En savoir plus
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </span>
+  </a>
+</article>
+
+<style>
+  .service-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+    overflow: hidden;
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .service-link {
+    display: block;
+    padding: var(--spacing-xl);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .service-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-secondary);
+  }
+
+  .service-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .service-card h3 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-primary);
+  }
+
+  .service-card p {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .service-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-secondary);
+  }
+
+  .service-cta svg {
+    transition: transform var(--transition-fast);
+  }
+
+  .service-card:hover .service-cta svg {
+    transform: translateX(4px);
+  }
+</style>

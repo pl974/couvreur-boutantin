@@ -1,0 +1,181 @@
+---
+/**
+ * Composant ContactForm - Formulaire de contact optimise conversion
+ * Champs concis et essentiels uniquement
+ */
+
+interface Props {
+  compact?: boolean;
+  title?: string;
+}
+
+const { compact = false, title = 'Demandez votre devis gratuit' } = Astro.props;
+---
+
+<div class="contact-form">
+  <h3 class="form-title">{title}</h3>
+
+  <form action="/api/contact" method="POST" class="form">
+    <div class="form-group">
+      <label for="name">Nom complet</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        required
+        placeholder="Votre nom"
+        autocomplete="name"
+      />
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="phone">Telephone</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          required
+          placeholder="06 00 00 00 00"
+          autocomplete="tel"
+        />
+      </div>
+
+      {!compact && (
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="votre@email.fr"
+            autocomplete="email"
+          />
+        </div>
+      )}
+    </div>
+
+    <div class="form-group">
+      <label for="service">Type de service</label>
+      <select id="service" name="service" required>
+        <option value="">Selectionnez un service</option>
+        <option value="reparation">Reparation toiture</option>
+        <option value="renovation">Renovation toiture</option>
+        <option value="demoussage">Demoussage</option>
+        <option value="zinguerie">Zinguerie</option>
+        <option value="isolation">Isolation toiture</option>
+        <option value="urgence">Urgence toiture</option>
+        <option value="autre">Autre demande</option>
+      </select>
+    </div>
+
+    {!compact && (
+      <div class="form-group">
+        <label for="city">Ville</label>
+        <input
+          type="text"
+          id="city"
+          name="city"
+          placeholder="Dunkerque, Calais..."
+          autocomplete="address-level2"
+        />
+      </div>
+    )}
+
+    <div class="form-group">
+      <label for="message">{compact ? 'Description rapide' : 'Votre message'}</label>
+      <textarea
+        id="message"
+        name="message"
+        rows={compact ? 2 : 4}
+        placeholder="Decrivez brievement votre besoin..."
+      ></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-full btn-lg">
+      Obtenir mon devis gratuit
+    </button>
+
+    <p class="form-notice">
+      Reponse garantie sous 24h - Devis 100% gratuit et sans engagement
+    </p>
+  </form>
+</div>
+
+<style>
+  .contact-form {
+    width: 100%;
+  }
+
+  .form-title {
+    font-size: var(--text-xl);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .form-group label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-gray-700);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.1);
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: var(--color-gray-400);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 60px;
+  }
+
+  .form-notice {
+    font-size: var(--text-xs);
+    color: var(--color-gray-500);
+    text-align: center;
+    margin: 0;
+  }
+
+  @media (max-width: 480px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,109 @@
+---
+/**
+ * Composant CityCard - Carte de zone d'intervention
+ * Pour afficher les villes couvertes
+ */
+
+interface Props {
+  name: string;
+  description: string;
+  href: string;
+  postalCode?: string;
+}
+
+const { name, description, href, postalCode } = Astro.props;
+---
+
+<article class="city-card">
+  <a href={href} class="city-link">
+    <div class="city-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+        <circle cx="12" cy="10" r="3"/>
+      </svg>
+    </div>
+    <div class="city-content">
+      <h3>
+        {name}
+        {postalCode && <span class="postal-code">{postalCode}</span>}
+      </h3>
+      <p>{description}</p>
+    </div>
+    <div class="city-arrow">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 18l6-6-6-6"/>
+      </svg>
+    </div>
+  </a>
+</article>
+
+<style>
+  .city-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+  }
+
+  .city-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+  }
+
+  .city-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .city-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--radius-md);
+  }
+
+  .city-content {
+    flex: 1;
+  }
+
+  .city-content h3 {
+    font-size: var(--text-base);
+    margin-bottom: var(--spacing-xs);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .postal-code {
+    font-size: var(--text-xs);
+    font-weight: 400;
+    color: var(--color-gray-500);
+  }
+
+  .city-content p {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .city-arrow {
+    flex-shrink: 0;
+    color: var(--color-gray-400);
+    transition: color var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .city-card:hover .city-arrow {
+    color: var(--color-primary);
+    transform: translateX(4px);
+  }
+</style>

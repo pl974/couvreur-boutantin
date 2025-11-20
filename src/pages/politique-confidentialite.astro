@@ -1,0 +1,150 @@
+---
+/**
+ * Page politique de confidentialite
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Politique de confidentialite"
+  description="Politique de confidentialite de Couvreur Boutantin. Informations sur la collecte et le traitement de vos donnees personnelles."
+  noindex={true}
+>
+  <section class="page-header">
+    <div class="container">
+      <h1>Politique de confidentialite</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="legal-content">
+        <h2>Introduction</h2>
+        <p>
+          La protection de vos donnees personnelles est une priorite pour Couvreur Boutantin.
+          Cette politique de confidentialite vous informe sur la maniere dont nous collectons,
+          utilisons et protegeons vos informations personnelles.
+        </p>
+
+        <h2>Donnees collectees</h2>
+        <p>
+          Nous collectons les donnees personnelles que vous nous fournissez volontairement
+          lors de l'utilisation de notre formulaire de contact :
+        </p>
+        <ul>
+          <li>Nom et prenom</li>
+          <li>Numero de telephone</li>
+          <li>Adresse email</li>
+          <li>Ville</li>
+          <li>Description de votre projet</li>
+        </ul>
+
+        <h2>Utilisation des donnees</h2>
+        <p>
+          Les donnees collectees sont utilisees exclusivement pour :
+        </p>
+        <ul>
+          <li>Repondre a vos demandes de devis</li>
+          <li>Vous contacter pour planifier une intervention</li>
+          <li>Assurer le suivi de votre dossier</li>
+          <li>Ameliorer nos services</li>
+        </ul>
+
+        <h2>Conservation des donnees</h2>
+        <p>
+          Vos donnees personnelles sont conservees pendant une duree de 3 ans a compter
+          de votre dernier contact avec nous. Au-dela de cette periode, vos donnees
+          sont supprimees.
+        </p>
+
+        <h2>Partage des donnees</h2>
+        <p>
+          Vos donnees personnelles ne sont jamais vendues, echangees ou louees a des
+          tiers. Elles peuvent etre partagees avec nos sous-traitants dans le cadre
+          strict de la realisation de nos services (ex: hebergeur du site).
+        </p>
+
+        <h2>Vos droits</h2>
+        <p>
+          Conformement au RGPD, vous disposez des droits suivants :
+        </p>
+        <ul>
+          <li>Droit d'acces a vos donnees</li>
+          <li>Droit de rectification</li>
+          <li>Droit a l'effacement</li>
+          <li>Droit a la limitation du traitement</li>
+          <li>Droit a la portabilite</li>
+          <li>Droit d'opposition</li>
+        </ul>
+        <p>
+          Pour exercer ces droits, contactez-nous a contact@couvreur-boutantin.fr.
+        </p>
+
+        <h2>Securite</h2>
+        <p>
+          Nous mettons en oeuvre des mesures techniques et organisationnelles appropriees
+          pour proteger vos donnees personnelles contre tout acces, modification, divulgation
+          ou destruction non autorises.
+        </p>
+
+        <h2>Modification de la politique</h2>
+        <p>
+          Cette politique de confidentialite peut etre modifiee a tout moment. Les modifications
+          prennent effet des leur publication sur ce site. Nous vous invitons a consulter
+          regulierement cette page.
+        </p>
+
+        <p>
+          <em>Derniere mise a jour : novembre 2024</em>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .page-header h1 {
+    color: var(--color-white);
+    margin: 0;
+  }
+
+  .legal-content {
+    max-width: 800px;
+  }
+
+  .legal-content h2 {
+    margin-top: var(--spacing-2xl);
+    margin-bottom: var(--spacing-md);
+    font-size: var(--text-xl);
+  }
+
+  .legal-content h2:first-child {
+    margin-top: 0;
+  }
+
+  .legal-content p {
+    color: var(--color-gray-700);
+    line-height: 1.8;
+  }
+
+  .legal-content ul {
+    margin: var(--spacing-md) 0;
+    padding-left: var(--spacing-xl);
+  }
+
+  .legal-content li {
+    color: var(--color-gray-700);
+    padding: var(--spacing-xs) 0;
+  }
+
+  .legal-content em {
+    color: var(--color-gray-500);
+  }
+</style>

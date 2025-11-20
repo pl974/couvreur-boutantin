@@ -1,0 +1,119 @@
+---
+/**
+ * Page mentions legales
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Mentions legales"
+  description="Mentions legales du site Couvreur Boutantin. Informations sur l'editeur, l'hebergeur et les conditions d'utilisation."
+  noindex={true}
+>
+  <section class="page-header">
+    <div class="container">
+      <h1>Mentions legales</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="legal-content">
+        <h2>Editeur du site</h2>
+        <p>
+          <strong>Couvreur Boutantin</strong><br>
+          Artisan couvreur<br>
+          Dunkerque, 59140<br>
+          Telephone : 03 28 00 00 00<br>
+          Email : contact@couvreur-boutantin.fr
+        </p>
+        <p>
+          SIRET : [Numero SIRET]<br>
+          Assurance garantie decennale : [Numero de police]
+        </p>
+
+        <h2>Hebergeur</h2>
+        <p>
+          [Nom de l'hebergeur]<br>
+          [Adresse de l'hebergeur]
+        </p>
+
+        <h2>Propriete intellectuelle</h2>
+        <p>
+          L'ensemble du contenu de ce site (textes, images, graphismes, logo, icones)
+          est la propriete exclusive de Couvreur Boutantin, a l'exception des marques,
+          logos ou contenus appartenant a d'autres societes partenaires ou auteurs.
+        </p>
+        <p>
+          Toute reproduction, distribution, modification, adaptation, retransmission
+          ou publication de ces differents elements est strictement interdite sans
+          l'accord expres par ecrit de Couvreur Boutantin.
+        </p>
+
+        <h2>Donnees personnelles</h2>
+        <p>
+          Les informations recueillies via le formulaire de contact sont destinees
+          a Couvreur Boutantin pour la gestion de vos demandes de devis et le suivi
+          de la relation client.
+        </p>
+        <p>
+          Conformement au Reglement General sur la Protection des Donnees (RGPD),
+          vous disposez d'un droit d'acces, de rectification et de suppression des
+          donnees vous concernant. Pour exercer ce droit, contactez-nous par email
+          a contact@couvreur-boutantin.fr.
+        </p>
+
+        <h2>Cookies</h2>
+        <p>
+          Ce site utilise des cookies techniques necessaires a son bon fonctionnement.
+          Ces cookies ne collectent aucune donnee personnelle a des fins publicitaires.
+        </p>
+
+        <h2>Responsabilite</h2>
+        <p>
+          Couvreur Boutantin s'efforce d'assurer l'exactitude des informations diffusees
+          sur ce site. Toutefois, elle ne peut garantir l'exactitude, la precision ou
+          l'exhaustivite des informations mises a disposition.
+        </p>
+        <p>
+          En consequence, Couvreur Boutantin decline toute responsabilite pour les
+          imprecisions, inexactitudes ou omissions portant sur des informations
+          disponibles sur ce site.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .page-header h1 {
+    color: var(--color-white);
+    margin: 0;
+  }
+
+  .legal-content {
+    max-width: 800px;
+  }
+
+  .legal-content h2 {
+    margin-top: var(--spacing-2xl);
+    margin-bottom: var(--spacing-md);
+    font-size: var(--text-xl);
+  }
+
+  .legal-content h2:first-child {
+    margin-top: 0;
+  }
+
+  .legal-content p {
+    color: var(--color-gray-700);
+    line-height: 1.8;
+  }
+</style>

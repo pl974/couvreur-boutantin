@@ -1,0 +1,306 @@
+---
+/**
+ * Page de contact
+ * Formulaire complet et informations de contact
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+---
+
+<BaseLayout
+  title="Contact - Devis gratuit couvreur Dunkerque"
+  description="Contactez Couvreur Boutantin pour un devis gratuit. Artisan couvreur a Dunkerque, intervention sur tout le littoral nord. Reponse sous 24h."
+>
+  <section class="page-header">
+    <div class="container">
+      <h1>Contactez-nous</h1>
+      <p>
+        Besoin d'un devis ou d'informations sur nos services ?
+        Notre equipe vous repond sous 24h.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h2>Nos coordonnees</h2>
+
+          <div class="info-items">
+            <div class="info-item">
+              <div class="info-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </div>
+              <div class="info-content">
+                <strong>Telephone</strong>
+                <a href="tel:+33328000000">03 28 00 00 00</a>
+                <span class="info-note">Du lundi au samedi</span>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div class="info-content">
+                <strong>Email</strong>
+                <a href="mailto:contact@couvreur-boutantin.fr">contact@couvreur-boutantin.fr</a>
+                <span class="info-note">Reponse sous 24h</span>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div class="info-content">
+                <strong>Zone d'intervention</strong>
+                <span>Dunkerque et littoral nord</span>
+                <span class="info-note">Rayon de 30 km</span>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div class="info-content">
+                <strong>Horaires</strong>
+                <span>Lun-Ven : 8h00 - 18h00</span>
+                <span>Samedi : 9h00 - 12h00</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="urgency-box">
+            <h3>Urgence toiture ?</h3>
+            <p>
+              En cas de fuite importante ou de degats suite a une tempete,
+              appelez-nous directement. Nous intervenons rapidement pour
+              securiser votre toiture.
+            </p>
+            <a href="tel:+33328000000" class="urgency-phone">
+              03 28 00 00 00
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-form-wrapper">
+          <ContactForm />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section seo-content">
+    <div class="container">
+      <h2>Demandez votre devis gratuit de couverture</h2>
+
+      <p>
+        Vous avez un projet de toiture a Dunkerque ou dans le Nord ?
+        Contactez <strong>Couvreur Boutantin</strong> pour obtenir un devis gratuit
+        et personnalise. Notre equipe d'artisans couvreurs qualifies vous conseille
+        et vous accompagne dans votre projet.
+      </p>
+
+      <h3>Comment se deroule la demande de devis ?</h3>
+
+      <ol class="steps-list">
+        <li>
+          <strong>Prise de contact</strong> - Remplissez le formulaire ou appelez-nous
+          pour nous decrire votre besoin.
+        </li>
+        <li>
+          <strong>Rendez-vous</strong> - Nous convenons d'un rendez-vous pour visiter
+          votre toiture et evaluer les travaux.
+        </li>
+        <li>
+          <strong>Devis detaille</strong> - Vous recevez un devis clair et complet
+          sous 24 a 48h apres la visite.
+        </li>
+        <li>
+          <strong>Validation</strong> - Vous prenez le temps de la reflexion, sans
+          aucune pression ni engagement.
+        </li>
+      </ol>
+
+      <h3>Pourquoi nous faire confiance ?</h3>
+
+      <p>
+        Artisan couvreur certifie RGE et assure en garantie decennale, nous intervenons
+        sur Dunkerque et tout le littoral nord depuis plus de 15 ans. Notre reputation
+        repose sur la qualite de nos travaux, notre serieux et notre transparence.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--spacing-3xl) 0;
+    text-align: center;
+  }
+
+  .page-header h1 {
+    color: var(--color-white);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .page-header p {
+    max-width: 500px;
+    margin: 0 auto;
+    color: var(--color-gray-200);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-3xl);
+  }
+
+  .contact-info h2 {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .info-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .info-item {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+
+  .info-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--radius-md);
+  }
+
+  .info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .info-content strong {
+    font-size: var(--text-sm);
+    color: var(--color-gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .info-content a,
+  .info-content span {
+    font-size: var(--text-base);
+    color: var(--color-gray-800);
+  }
+
+  .info-content a:hover {
+    color: var(--color-secondary);
+  }
+
+  .info-note {
+    font-size: var(--text-sm) !important;
+    color: var(--color-gray-500) !important;
+  }
+
+  .urgency-box {
+    background-color: var(--color-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+  }
+
+  .urgency-box h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-gray-900);
+  }
+
+  .urgency-box p {
+    font-size: var(--text-sm);
+    color: var(--color-gray-800);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .urgency-phone {
+    display: inline-block;
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-gray-900);
+  }
+
+  .urgency-phone:hover {
+    color: var(--color-primary);
+  }
+
+  .contact-form-wrapper {
+    background-color: var(--color-gray-50);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+  }
+
+  .seo-content {
+    background-color: var(--color-gray-50);
+  }
+
+  .seo-content h2 {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .seo-content h3 {
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .seo-content p {
+    color: var(--color-gray-700);
+    line-height: 1.8;
+  }
+
+  .steps-list {
+    padding-left: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+  }
+
+  .steps-list li {
+    padding: var(--spacing-sm) 0;
+    color: var(--color-gray-700);
+    line-height: 1.6;
+  }
+
+  .steps-list strong {
+    color: var(--color-gray-900);
+  }
+
+  @media (max-width: 1024px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

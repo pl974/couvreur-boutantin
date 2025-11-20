@@ -1,0 +1,207 @@
+---
+/**
+ * Page index des services
+ * Liste tous les services de couverture proposes
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import { services } from '../../utils/seo';
+---
+
+<BaseLayout
+  title="Services de couverture a Dunkerque"
+  description="Decouvrez tous nos services de couverture a Dunkerque : reparation, renovation, demoussage, zinguerie, isolation. Artisan certifie RGE, devis gratuit."
+>
+  <section class="page-header">
+    <div class="container">
+      <h1>Nos services de couverture</h1>
+      <p>
+        Du simple entretien a la renovation complete, nous proposons une gamme complete
+        de services pour votre toiture. Tous nos travaux sont realises par des artisans
+        qualifies et sont couverts par notre garantie decennale.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-3">
+        {services.map(service => (
+          <ServiceCard
+            title={service.name}
+            description={service.shortDescription}
+            icon={service.icon}
+            href={`/services/${service.slug}/`}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-section">
+    <div class="container">
+      <div class="cta-grid">
+        <div class="cta-content">
+          <h2>Besoin d'un devis pour vos travaux de toiture ?</h2>
+          <p>
+            Contactez-nous pour obtenir un devis gratuit et personnalise.
+            Nous vous repondons sous 24h.
+          </p>
+          <ul class="cta-features">
+            <li>Devis gratuit et sans engagement</li>
+            <li>Reponse garantie sous 24h</li>
+            <li>Intervention sur tout le littoral nord</li>
+          </ul>
+        </div>
+        <div class="cta-form">
+          <ContactForm compact={true} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section seo-content">
+    <div class="container">
+      <h2>Artisan couvreur a Dunkerque pour tous vos travaux de toiture</h2>
+
+      <p>
+        <strong>Couvreur Boutantin</strong> est votre partenaire de confiance pour tous
+        vos travaux de toiture dans la region dunkerquoise. Notre equipe de couvreurs
+        qualifies intervient pour la reparation, la renovation et l'entretien de tous
+        types de couvertures.
+      </p>
+
+      <h3>Reparation et renovation de toiture</h3>
+
+      <p>
+        Une toiture endommagee peut rapidement causer des problemes d'infiltration et
+        de degats des eaux. C'est pourquoi nous proposons un service de reparation rapide
+        et efficace. Pour les toitures plus anciennes, nous realisons des renovations
+        completes incluant le remplacement de la couverture, la refection de la charpente
+        si necessaire et l'amelioration de l'isolation.
+      </p>
+
+      <h3>Entretien et demoussage</h3>
+
+      <p>
+        L'entretien regulier de votre toiture est essentiel pour prolonger sa duree de vie.
+        Notre service de demoussage elimine les mousses, lichens et algues qui se developpent
+        sur les tuiles et ardoises. Nous appliquons ensuite un traitement hydrofuge pour
+        proteger votre couverture.
+      </p>
+
+      <h3>Zinguerie et travaux d'etancheite</h3>
+
+      <p>
+        La zinguerie comprend tous les elements metalliques de votre toiture : gouttieres,
+        descentes d'eau pluviale, faitages, arêtiers et solins. Ces elements sont essentiels
+        pour garantir l'etancheite de votre toit et l'evacuation des eaux de pluie.
+      </p>
+
+      <h3>Isolation de toiture et combles</h3>
+
+      <p>
+        En tant qu'artisan certifie RGE, nous realisons vos travaux d'isolation dans le
+        respect des normes en vigueur. Une bonne isolation de toiture vous permet de reduire
+        significativement vos factures d'energie et d'ameliorer votre confort thermique.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--spacing-3xl) 0;
+    text-align: center;
+  }
+
+  .page-header h1 {
+    color: var(--color-white);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .page-header p {
+    max-width: 700px;
+    margin: 0 auto;
+    color: var(--color-gray-200);
+  }
+
+  .cta-section {
+    background-color: var(--color-gray-50);
+  }
+
+  .cta-grid {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: var(--spacing-3xl);
+    align-items: center;
+  }
+
+  .cta-content h2 {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .cta-content > p {
+    color: var(--color-gray-600);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .cta-features {
+    list-style: none;
+    padding: 0;
+  }
+
+  .cta-features li {
+    padding: var(--spacing-xs) 0;
+    padding-left: var(--spacing-lg);
+    position: relative;
+    color: var(--color-gray-700);
+  }
+
+  .cta-features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-secondary);
+    border-radius: 50%;
+  }
+
+  .cta-form {
+    background-color: var(--color-white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .seo-content h2 {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .seo-content h3 {
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .seo-content p {
+    color: var(--color-gray-700);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 1024px) {
+    .cta-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-form {
+      max-width: 500px;
+    }
+  }
+</style>

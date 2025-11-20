@@ -1,0 +1,95 @@
+---
+/**
+ * Composant Testimonial - Avis client
+ * Pour afficher les temoignages et renforcer la confiance
+ */
+
+interface Props {
+  name: string;
+  location: string;
+  text: string;
+  rating?: number;
+}
+
+const { name, location, text, rating = 5 } = Astro.props;
+---
+
+<article class="testimonial">
+  <div class="testimonial-rating" aria-label={`Note: ${rating} sur 5`}>
+    {Array.from({ length: 5 }).map((_, i) => (
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill={i < rating ? 'currentColor' : 'none'}
+        stroke="currentColor"
+        stroke-width="2"
+        class:list={{ filled: i < rating }}
+      >
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+      </svg>
+    ))}
+  </div>
+  <blockquote class="testimonial-text">
+    <p>"{text}"</p>
+  </blockquote>
+  <footer class="testimonial-author">
+    <span class="author-name">{name}</span>
+    <span class="author-location">{location}</span>
+  </footer>
+</article>
+
+<style>
+  .testimonial {
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+  }
+
+  .testimonial-rating {
+    display: flex;
+    gap: 2px;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-secondary);
+  }
+
+  .testimonial-rating svg.filled {
+    color: var(--color-secondary);
+  }
+
+  .testimonial-rating svg:not(.filled) {
+    color: var(--color-gray-300);
+  }
+
+  .testimonial-text {
+    margin: 0 0 var(--spacing-lg);
+    border: none;
+    padding: 0;
+  }
+
+  .testimonial-text p {
+    font-size: var(--text-base);
+    color: var(--color-gray-700);
+    line-height: 1.7;
+    font-style: italic;
+    margin: 0;
+  }
+
+  .testimonial-author {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .author-name {
+    font-weight: 600;
+    color: var(--color-gray-900);
+    font-size: var(--text-sm);
+  }
+
+  .author-location {
+    font-size: var(--text-xs);
+    color: var(--color-gray-500);
+  }
+</style>

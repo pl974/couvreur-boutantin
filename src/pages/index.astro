@@ -1,0 +1,522 @@
+---
+/**
+ * Page d'accueil - Couvreur Boutantin
+ * Optimisee pour la conversion et le SEO local
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBadges from '../components/TrustBadges.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import CityCard from '../components/CityCard.astro';
+import Testimonial from '../components/Testimonial.astro';
+import FAQ from '../components/FAQ.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Button from '../components/Button.astro';
+import { services, cities } from '../utils/seo';
+
+const faqItems = [
+  {
+    question: "Combien coute une reparation de toiture a Dunkerque ?",
+    answer: "Le cout d'une reparation de toiture varie selon l'etendue des degats. Une petite reparation (tuiles cassees) coute entre 150 et 500 euros. Pour une evaluation precise, nous vous proposons un devis gratuit sous 24h apres visite sur place."
+  },
+  {
+    question: "Intervenez-vous en urgence pour les fuites de toiture ?",
+    answer: "Oui, nous proposons un service d'intervention d'urgence pour les fuites et degats suite a tempete. Nous pouvons intervenir rapidement pour bacher et securiser votre toiture en attendant la reparation definitive."
+  },
+  {
+    question: "Etes-vous certifie RGE pour l'isolation de toiture ?",
+    answer: "Oui, nous sommes artisan certifie RGE (Reconnu Garant de l'Environnement). Cette certification vous permet de beneficier des aides financieres pour vos travaux d'isolation : MaPrimeRenov', CEE, eco-PTZ."
+  },
+  {
+    question: "Quelle est votre zone d'intervention autour de Dunkerque ?",
+    answer: "Nous intervenons sur tout le littoral nord : Dunkerque, Calais, Gravelines, Grande-Synthe, Coudekerque-Branche, Saint-Pol-sur-Mer, Bray-Dunes et toutes les communes environnantes dans un rayon de 30 km."
+  },
+  {
+    question: "Proposez-vous une garantie decennale ?",
+    answer: "Oui, tous nos travaux de couverture sont couverts par notre garantie decennale. Cette assurance vous protege pendant 10 ans contre les malfacons et defauts de construction affectant la solidite de l'ouvrage."
+  }
+];
+
+const testimonials = [
+  {
+    name: "Pierre D.",
+    location: "Dunkerque",
+    text: "Intervention rapide suite a une fuite apres la tempete. Travail soigne et equipe professionnelle. Je recommande vivement Couvreur Boutantin.",
+    rating: 5
+  },
+  {
+    name: "Marie L.",
+    location: "Calais",
+    text: "Tres satisfaite de la renovation complete de ma toiture. Respect des delais, chantier propre et excellent rapport qualite-prix. Merci !",
+    rating: 5
+  },
+  {
+    name: "Jean-Marc B.",
+    location: "Grande-Synthe",
+    text: "Demoussage et traitement de ma toiture realises avec soin. Le resultat est impeccable et l'equipe tres agreable. Devis respecte.",
+    rating: 5
+  }
+];
+---
+
+<BaseLayout
+  title="Couvreur a Dunkerque - Artisan toiture dans le Nord"
+  description="Couvreur professionnel a Dunkerque et alentours. Reparation, renovation et entretien de toiture. Artisan certifie RGE, garantie decennale. Devis gratuit sous 24h."
+>
+  <!-- Hero Section avec CTA au-dessus de la ligne de flottaison -->
+  <Hero
+    title="Votre couvreur de confiance a Dunkerque"
+    subtitle="Artisan certifie RGE"
+    description="Specialistes de la toiture depuis plus de 15 ans, nous intervenons sur Dunkerque et tout le littoral nord pour vos travaux de reparation, renovation et entretien de couverture."
+  />
+
+  <!-- Badges de confiance -->
+  <TrustBadges />
+
+  <!-- Section Services -->
+  <section class="section services-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Nos services de couverture</h2>
+        <p>
+          Du simple demoussage a la renovation complete, nous proposons une gamme complete
+          de services pour entretenir et reparer votre toiture.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        {services.slice(0, 6).map(service => (
+          <ServiceCard
+            title={service.name}
+            description={service.shortDescription}
+            icon={service.icon}
+            href={`/services/${service.slug}/`}
+          />
+        ))}
+      </div>
+
+      <div class="section-cta">
+        <Button href="/services/" variant="outline">
+          Voir tous nos services
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Pourquoi nous choisir -->
+  <section class="section why-section">
+    <div class="container">
+      <div class="why-grid">
+        <div class="why-content">
+          <h2>Pourquoi choisir Couvreur Boutantin ?</h2>
+          <p>
+            Depuis plus de 15 ans, nous mettons notre expertise au service des habitants
+            de Dunkerque et du littoral nord. Notre engagement : un travail de qualite,
+            des conseils personnalises et une relation de confiance durable.
+          </p>
+
+          <ul class="why-list">
+            <li>
+              <strong>Expertise locale</strong> - Connaissance parfaite des toitures de la region
+              et des contraintes climatiques du littoral
+            </li>
+            <li>
+              <strong>Artisan certifie</strong> - Certification RGE Qualibat pour des travaux
+              de qualite et l'acces aux aides financieres
+            </li>
+            <li>
+              <strong>Reactivite</strong> - Devis gratuit sous 24h et intervention rapide
+              en cas d'urgence
+            </li>
+            <li>
+              <strong>Garanties solides</strong> - Garantie decennale et assurance
+              responsabilite civile professionnelle
+            </li>
+            <li>
+              <strong>Transparence</strong> - Devis detaille sans surprise, explications
+              claires sur les travaux
+            </li>
+          </ul>
+
+          <Button href="/contact/" variant="primary" size="lg">
+            Demander un devis gratuit
+          </Button>
+        </div>
+
+        <div class="why-image">
+          <img
+            src="/images/artisan-couvreur.webp"
+            alt="Artisan couvreur Boutantin au travail sur une toiture a Dunkerque"
+            width="500"
+            height="400"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Zones d'intervention -->
+  <section class="section zones-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Nos zones d'intervention</h2>
+        <p>
+          Nous intervenons sur Dunkerque et toutes les communes du littoral nord.
+          Decouvrez nos prestations pres de chez vous.
+        </p>
+      </div>
+
+      <div class="grid grid-2">
+        {cities.slice(0, 6).map(city => (
+          <CityCard
+            name={city.name}
+            description={city.shortDescription}
+            href={`/zones/${city.slug}/`}
+            postalCode={city.postalCode}
+          />
+        ))}
+      </div>
+
+      <div class="section-cta">
+        <Button href="/zones/" variant="outline">
+          Toutes nos zones d'intervention
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Temoignages -->
+  <section class="section testimonials-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Ce que disent nos clients</h2>
+        <p>
+          La satisfaction de nos clients est notre priorite. Decouvrez leurs avis
+          sur nos prestations.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        {testimonials.map(testimonial => (
+          <Testimonial
+            name={testimonial.name}
+            location={testimonial.location}
+            text={testimonial.text}
+            rating={testimonial.rating}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Section FAQ -->
+  <section class="section faq-section-wrapper">
+    <div class="container">
+      <FAQ items={faqItems} />
+    </div>
+  </section>
+
+  <!-- Section Contact CTA -->
+  <section class="section contact-section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-content">
+          <h2>Besoin d'un couvreur a Dunkerque ?</h2>
+          <p>
+            Contactez-nous pour obtenir un devis gratuit et personnalise.
+            Notre equipe vous repond sous 24h et intervient rapidement
+            sur toute la region dunkerquoise.
+          </p>
+
+          <div class="contact-info">
+            <div class="contact-item">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <div>
+                <strong>Telephone</strong>
+                <a href="tel:+33328000000">03 28 00 00 00</a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              <div>
+                <strong>Email</strong>
+                <a href="mailto:contact@couvreur-boutantin.fr">contact@couvreur-boutantin.fr</a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <div>
+                <strong>Horaires</strong>
+                <span>Lun-Ven: 8h-18h / Sam: 9h-12h</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-wrapper">
+          <ContactForm />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contenu SEO supplementaire -->
+  <section class="section seo-content">
+    <div class="container">
+      <h2>Votre artisan couvreur a Dunkerque et dans le Nord</h2>
+
+      <p>
+        <strong>Couvreur Boutantin</strong> est votre specialiste de la toiture a Dunkerque
+        et sur tout le littoral nord. Fort de plus de 15 ans d'experience, notre entreprise
+        de couverture intervient pour tous vos travaux : reparation de toiture, renovation
+        complete, demoussage, zinguerie et isolation.
+      </p>
+
+      <h3>Des prestations adaptees a tous les besoins</h3>
+
+      <p>
+        Que vous ayez besoin d'une simple <a href="/services/reparation-toiture/">reparation
+        de tuiles cassees</a> ou d'une <a href="/services/renovation-toiture/">renovation
+        complete de votre couverture</a>, notre equipe de couvreurs qualifies est a votre
+        service. Nous intervenons sur tous types de toitures : tuiles, ardoises, zinc,
+        bac acier et toitures plates.
+      </p>
+
+      <p>
+        Le climat du littoral nord, avec ses vents marins et son humidite, met les toitures
+        a rude epreuve. C'est pourquoi nous proposons des services d'entretien regulier
+        comme le <a href="/services/demoussage/">demoussage et traitement anti-mousse</a>,
+        essentiels pour prolonger la duree de vie de votre toit.
+      </p>
+
+      <h3>Un artisan certifie pour vos travaux d'isolation</h3>
+
+      <p>
+        En tant qu'artisan certifie RGE (Reconnu Garant de l'Environnement), nous realisons
+        vos travaux d'<a href="/services/isolation/">isolation de toiture et de combles</a>
+        dans le respect des normes en vigueur. Cette certification vous permet de beneficier
+        des aides financieres de l'Etat : MaPrimeRenov', Certificats d'Economie d'Energie (CEE)
+        et eco-pret a taux zero.
+      </p>
+
+      <h3>Intervention sur tout le littoral nord</h3>
+
+      <p>
+        Notre entreprise de couverture intervient sur <a href="/zones/dunkerque/">Dunkerque</a>
+        et toutes les communes environnantes : <a href="/zones/calais/">Calais</a>,
+        <a href="/zones/gravelines/">Gravelines</a>, <a href="/zones/grande-synthe/">Grande-Synthe</a>,
+        <a href="/zones/coudekerque/">Coudekerque-Branche</a>, <a href="/zones/saint-pol-sur-mer/">
+        Saint-Pol-sur-Mer</a>, <a href="/zones/bray-dunes/">Bray-Dunes</a> et
+        <a href="/zones/loon-plage/">Loon-Plage</a>.
+      </p>
+
+      <p>
+        Nous vous proposons un devis gratuit et detaille sous 24h. Contactez-nous par telephone
+        au <a href="tel:+33328000000">03 28 00 00 00</a> ou via notre formulaire en ligne
+        pour discuter de votre projet de toiture.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section-cta {
+    text-align: center;
+    margin-top: var(--spacing-2xl);
+  }
+
+  /* Section Why */
+  .why-section {
+    background-color: var(--color-gray-50);
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-3xl);
+    align-items: center;
+  }
+
+  .why-content h2 {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .why-content > p {
+    color: var(--color-gray-600);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .why-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .why-list li {
+    padding: var(--spacing-sm) 0;
+    padding-left: var(--spacing-lg);
+    position: relative;
+    color: var(--color-gray-700);
+  }
+
+  .why-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-secondary);
+    border-radius: 50%;
+  }
+
+  .why-list strong {
+    color: var(--color-gray-900);
+  }
+
+  .why-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+  }
+
+  .why-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  /* Section Zones */
+  .zones-section {
+    background-color: var(--color-white);
+  }
+
+  /* Section Testimonials */
+  .testimonials-section {
+    background-color: var(--color-gray-50);
+  }
+
+  /* Section FAQ */
+  .faq-section-wrapper {
+    background-color: var(--color-white);
+  }
+
+  /* Section Contact */
+  .contact-section {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-3xl);
+    align-items: start;
+  }
+
+  .contact-content h2 {
+    color: var(--color-white);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .contact-content > p {
+    color: var(--color-gray-200);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+  }
+
+  .contact-item svg {
+    flex-shrink: 0;
+    color: var(--color-secondary);
+  }
+
+  .contact-item div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .contact-item strong {
+    font-size: var(--text-sm);
+    color: var(--color-gray-300);
+  }
+
+  .contact-item a,
+  .contact-item span {
+    color: var(--color-white);
+    font-size: var(--text-base);
+  }
+
+  .contact-item a:hover {
+    color: var(--color-secondary);
+  }
+
+  .contact-form-wrapper {
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+  }
+
+  /* Section SEO */
+  .seo-content {
+    background-color: var(--color-gray-50);
+  }
+
+  .seo-content h2 {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .seo-content h3 {
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .seo-content p {
+    color: var(--color-gray-700);
+    line-height: 1.8;
+  }
+
+  .seo-content a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .seo-content a:hover {
+    color: var(--color-secondary);
+  }
+
+  @media (max-width: 1024px) {
+    .why-grid,
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .why-image {
+      order: -1;
+    }
+  }
+</style>

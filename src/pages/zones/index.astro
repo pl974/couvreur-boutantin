@@ -1,0 +1,200 @@
+---
+/**
+ * Page index des zones d'intervention
+ * Liste toutes les villes couvertes
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CityCard from '../../components/CityCard.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import { cities } from '../../utils/seo';
+---
+
+<BaseLayout
+  title="Zones d'intervention couvreur - Dunkerque et alentours"
+  description="Couvreur intervenant sur Dunkerque, Calais, Gravelines, Grande-Synthe et tout le littoral nord. Reparation et renovation de toiture. Devis gratuit."
+>
+  <section class="page-header">
+    <div class="container">
+      <h1>Nos zones d'intervention</h1>
+      <p>
+        Nous intervenons sur Dunkerque et toutes les communes du littoral nord.
+        Decouvrez nos prestations de couverture pres de chez vous.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2">
+        {cities.map(city => (
+          <CityCard
+            name={city.name}
+            description={city.shortDescription}
+            href={`/zones/${city.slug}/`}
+            postalCode={city.postalCode}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-section">
+    <div class="container">
+      <div class="cta-grid">
+        <div class="cta-content">
+          <h2>Votre ville n'est pas listee ?</h2>
+          <p>
+            Nous intervenons sur tout le littoral nord dans un rayon de 30 km
+            autour de Dunkerque. Contactez-nous pour verifier que nous couvrons
+            votre commune.
+          </p>
+          <ul class="cta-features">
+            <li>Intervention rapide</li>
+            <li>Devis gratuit sous 24h</li>
+            <li>Deplacement offert</li>
+          </ul>
+        </div>
+        <div class="cta-form">
+          <ContactForm compact={true} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section seo-content">
+    <div class="container">
+      <h2>Artisan couvreur sur tout le littoral nord</h2>
+
+      <p>
+        <strong>Couvreur Boutantin</strong> intervient sur l'ensemble du littoral nord,
+        de Calais a la frontiere belge. Notre connaissance du terrain et des specificites
+        locales nous permet de vous proposer des solutions adaptees aux contraintes
+        climatiques de la region.
+      </p>
+
+      <h3>Une expertise adaptee au climat maritime</h3>
+
+      <p>
+        Le littoral nord est soumis a des conditions climatiques particulieres :
+        vents marins charges de sel, forte humidite et precipitations frequentes.
+        Ces elements mettent les toitures a rude epreuve et necessitent une attention
+        particuliere. Notre experience locale nous permet de vous conseiller les
+        materiaux et techniques les plus adaptes.
+      </p>
+
+      <h3>Intervention sur toutes les communes</h3>
+
+      <p>
+        Nous intervenons sur Dunkerque et sa communaute urbaine, mais aussi sur
+        Calais et les communes du Calaisis. Que vous habitiez en centre-ville
+        ou dans les quartiers peripheriques, nous nous deplacons chez vous pour
+        evaluer vos besoins et vous proposer un devis gratuit.
+      </p>
+
+      <h3>Des delais d'intervention rapides</h3>
+
+      <p>
+        Grace a notre implantation locale, nous sommes en mesure d'intervenir
+        rapidement sur toute notre zone de couverture. En cas d'urgence (fuite,
+        degats apres tempete), nous pouvons generalement etre sur place dans
+        les 24 a 48 heures.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--spacing-3xl) 0;
+    text-align: center;
+  }
+
+  .page-header h1 {
+    color: var(--color-white);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .page-header p {
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--color-gray-200);
+  }
+
+  .cta-section {
+    background-color: var(--color-gray-50);
+  }
+
+  .cta-grid {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: var(--spacing-3xl);
+    align-items: center;
+  }
+
+  .cta-content h2 {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .cta-content > p {
+    color: var(--color-gray-600);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .cta-features {
+    list-style: none;
+    padding: 0;
+  }
+
+  .cta-features li {
+    padding: var(--spacing-xs) 0;
+    padding-left: var(--spacing-lg);
+    position: relative;
+    color: var(--color-gray-700);
+  }
+
+  .cta-features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-secondary);
+    border-radius: 50%;
+  }
+
+  .cta-form {
+    background-color: var(--color-white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .seo-content h2 {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .seo-content h3 {
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .seo-content p {
+    color: var(--color-gray-700);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 1024px) {
+    .cta-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-form {
+      max-width: 500px;
+    }
+  }
+</style>

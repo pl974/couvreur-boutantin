@@ -1,0 +1,20 @@
+{
+  "name": "couvreur-boutantin",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Site professionnel pour couvreur à Dunkerque et alentours - Optimisé SEO",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^4.0.0",
+    "@astrojs/sitemap": "^3.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0"
+  }
+}
