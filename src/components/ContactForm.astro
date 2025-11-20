@@ -2,14 +2,24 @@
 /**
  * Composant ContactForm - Formulaire de contact optimise conversion
  * Champs concis et essentiels uniquement
+ *
+ * Modes disponibles :
+ * - Normal : Tous les champs (nom, phone, email, service, ville, message)
+ * - Compact : Champs reduits (nom, phone, service, message court)
+ * - Ultra-compact : 3 champs seulement (nom, phone, service) - Maximum conversion
  */
 
 interface Props {
   compact?: boolean;
+  ultraCompact?: boolean;
   title?: string;
 }
 
-const { compact = false, title = 'Demandez votre devis gratuit' } = Astro.props;
+const {
+  compact = false,
+  ultraCompact = false,
+  title = ultraCompact ? 'Devis gratuit en 30 secondes' : 'Demandez votre devis gratuit'
+} = Astro.props;
 ---
 
 <div class="contact-form">
@@ -28,7 +38,7 @@ const { compact = false, title = 'Demandez votre devis gratuit' } = Astro.props;
       />
     </div>
 
-    <div class="form-row">
+    {ultraCompact ? (
       <div class="form-group">
         <label for="phone">Telephone</label>
         <input
@@ -40,20 +50,34 @@ const { compact = false, title = 'Demandez votre devis gratuit' } = Astro.props;
           autocomplete="tel"
         />
       </div>
-
-      {!compact && (
+    ) : (
+      <div class="form-row">
         <div class="form-group">
-          <label for="email">Email</label>
+          <label for="phone">Telephone</label>
           <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="votre@email.fr"
-            autocomplete="email"
+            type="tel"
+            id="phone"
+            name="phone"
+            required
+            placeholder="06 00 00 00 00"
+            autocomplete="tel"
           />
         </div>
-      )}
-    </div>
+
+        {!compact && (
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="votre@email.fr"
+              autocomplete="email"
+            />
+          </div>
+        )}
+      </div>
+    )}
 
     <div class="form-group">
       <label for="service">Type de service</label>
@@ -69,7 +93,7 @@ const { compact = false, title = 'Demandez votre devis gratuit' } = Astro.props;
       </select>
     </div>
 
-    {!compact && (
+    {!ultraCompact && !compact && (
       <div class="form-group">
         <label for="city">Ville</label>
         <input
@@ -82,22 +106,26 @@ const { compact = false, title = 'Demandez votre devis gratuit' } = Astro.props;
       </div>
     )}
 
-    <div class="form-group">
-      <label for="message">{compact ? 'Description rapide' : 'Votre message'}</label>
-      <textarea
-        id="message"
-        name="message"
-        rows={compact ? 2 : 4}
-        placeholder="Decrivez brievement votre besoin..."
-      ></textarea>
-    </div>
+    {!ultraCompact && (
+      <div class="form-group">
+        <label for="message">{compact ? 'Description rapide' : 'Votre message'}</label>
+        <textarea
+          id="message"
+          name="message"
+          rows={compact ? 2 : 4}
+          placeholder="Decrivez brievement votre besoin..."
+        ></textarea>
+      </div>
+    )}
 
     <button type="submit" class="btn btn-primary btn-full btn-lg">
-      Obtenir mon devis gratuit
+      {ultraCompact ? 'Recevoir mon devis' : 'Obtenir mon devis gratuit'}
     </button>
 
     <p class="form-notice">
-      Reponse garantie sous 24h - Devis 100% gratuit et sans engagement
+      {ultraCompact
+        ? 'Nous vous rappelons sous 24h - 100% gratuit'
+        : 'Reponse garantie sous 24h - Devis 100% gratuit et sans engagement'}
     </p>
   </form>
 </div>

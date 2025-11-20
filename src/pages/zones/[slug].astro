@@ -9,6 +9,7 @@ import ServiceCard from '../../components/ServiceCard.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import FAQ from '../../components/FAQ.astro';
 import Button from '../../components/Button.astro';
+import Gallery from '../../components/Gallery.astro';
 import { cities, services, generateCitySchema } from '../../utils/seo';
 
 export function getStaticPaths() {
@@ -19,6 +20,57 @@ export function getStaticPaths() {
 }
 
 const { city } = Astro.props;
+
+// Galerie de realisations par ville
+const cityGalleries: Record<string, Array<{before: string; after: string; title: string; description: string}>> = {
+  'dunkerque': [
+    {
+      before: '/images/gallery/realisation-01-avant.webp',
+      after: '/images/gallery/realisation-01-apres.webp',
+      title: 'Renovation toiture Dunkerque centre',
+      description: 'Renovation complete maison de ville. Quartier centre-ville.'
+    },
+    {
+      before: '/images/gallery/realisation-02-avant.webp',
+      after: '/images/gallery/realisation-02-apres.webp',
+      title: 'Demoussage villa Malo-les-Bains',
+      description: 'Traitement anti-mousse et hydrofuge. Secteur Malo-les-Bains.'
+    }
+  ],
+  'calais': [
+    {
+      before: '/images/gallery/realisation-01-avant.webp',
+      after: '/images/gallery/realisation-01-apres.webp',
+      title: 'Renovation toiture Calais',
+      description: 'Remplacement couverture maison individuelle a Calais.'
+    }
+  ],
+  'gravelines': [
+    {
+      before: '/images/gallery/realisation-03-avant.webp',
+      after: '/images/gallery/realisation-03-apres.webp',
+      title: 'Zinguerie Gravelines',
+      description: 'Remplacement gouttieres et faitages a Gravelines.'
+    }
+  ],
+  'grande-synthe': [
+    {
+      before: '/images/gallery/realisation-02-avant.webp',
+      after: '/images/gallery/realisation-02-apres.webp',
+      title: 'Toiture Grande-Synthe',
+      description: 'Intervention complete a Grande-Synthe.'
+    }
+  ]
+};
+
+const galleryItems = cityGalleries[city.slug] || [
+  {
+    before: '/images/gallery/realisation-01-avant.webp',
+    after: '/images/gallery/realisation-01-apres.webp',
+    title: `Intervention a ${city.name}`,
+    description: `Exemple de nos realisations a ${city.name} et communes voisines.`
+  }
+];
 
 // FAQ pour les pages de villes
 const faqItems = [
@@ -66,6 +118,24 @@ const structuredData = generateCitySchema({
           <Button href="#devis" variant="outline" size="lg">
             Demander un devis
           </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image de la ville -->
+  <section class="city-image-section">
+    <div class="container">
+      <div class="city-image-wrapper">
+        <img
+          src={`/images/zones/${city.slug}-ville.webp`}
+          alt={`${city.name} - Zone d'intervention Couvreur Boutantin`}
+          width="1200"
+          height="500"
+          loading="eager"
+        />
+        <div class="city-image-overlay">
+          <h2>Couvreur a {city.name} ({city.postalCode})</h2>
         </div>
       </div>
     </div>
@@ -170,6 +240,14 @@ const structuredData = generateCitySchema({
     </div>
   </section>
 
+  <!-- Realisations locales -->
+  <Gallery
+    items={galleryItems}
+    title={`Nos realisations a ${city.name}`}
+    subtitle="Exemples de nos interventions dans votre commune"
+  />
+
+  <!-- FAQ -->
   <section class="section faq-section">
     <div class="container">
       <FAQ items={faqItems} title={`Questions frequentes - Couvreur a ${city.name}`} />
@@ -198,6 +276,41 @@ const structuredData = generateCitySchema({
 </BaseLayout>
 
 <style>
+  .city-image-section {
+    padding: 0;
+    position: relative;
+  }
+
+  .city-image-wrapper {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .city-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    max-height: 400px;
+  }
+
+  .city-image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-xl) var(--container-padding);
+    background: linear-gradient(to top, rgba(30, 58, 95, 0.9), transparent);
+  }
+
+  .city-image-overlay h2 {
+    color: var(--color-white);
+    font-size: var(--text-3xl);
+    margin: 0;
+  }
+
   .page-header {
     background-color: var(--color-primary);
     color: var(--color-white);

@@ -28,6 +28,14 @@ const navLinks = [
         <span class="logo-accent">Boutantin</span>
       </a>
 
+      <a href="tel:+33328000000" class="urgence-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <span>Urgence 24/7</span>
+      </a>
+
       <nav class="nav" aria-label="Navigation principale">
         <ul class="nav-list">
           {navLinks.map(link => (
@@ -101,6 +109,49 @@ const navLinks = [
     color: var(--color-secondary);
     text-transform: uppercase;
     letter-spacing: 0.1em;
+  }
+
+  .urgence-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    color: var(--color-white);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+    animation: pulse-urgence 2s ease-in-out infinite;
+  }
+
+  .urgence-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+  }
+
+  .urgence-badge svg {
+    animation: rotate-clock 4s linear infinite;
+  }
+
+  @keyframes pulse-urgence {
+    0%, 100% {
+      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+    }
+    50% {
+      box-shadow: 0 2px 16px rgba(220, 38, 38, 0.5);
+    }
+  }
+
+  @keyframes rotate-clock {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
   .nav-list {
@@ -188,9 +239,27 @@ const navLinks = [
     }
   }
 
+  @media (max-width: 768px) {
+    .urgence-badge {
+      font-size: var(--text-xs);
+      padding: var(--spacing-xs) var(--spacing-sm);
+    }
+  }
+
   @media (max-width: 480px) {
     .header-cta button {
       display: none;
+    }
+
+    .urgence-badge span {
+      display: none;
+    }
+
+    .urgence-badge {
+      padding: var(--spacing-xs);
+      width: 36px;
+      height: 36px;
+      justify-content: center;
     }
   }
 </style>

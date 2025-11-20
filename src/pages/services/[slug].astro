@@ -8,6 +8,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import FAQ from '../../components/FAQ.astro';
 import Button from '../../components/Button.astro';
+import Gallery from '../../components/Gallery.astro';
+import PriceRange from '../../components/PriceRange.astro';
+import ProcessSteps from '../../components/ProcessSteps.astro';
 import { services, generateServiceSchema } from '../../utils/seo';
 
 export function getStaticPaths() {
@@ -122,6 +125,191 @@ const faqItems = serviceFAQs[service.slug] || [
   }
 ];
 
+// Galeries specifiques par service
+const serviceGalleries: Record<string, Array<{before: string; after: string; title: string; description: string}>> = {
+  'reparation-toiture': [
+    {
+      before: '/images/services/reparation-avant-1.webp',
+      after: '/images/services/reparation-apres-1.webp',
+      title: 'Reparation tuiles cassees',
+      description: 'Remplacement de tuiles endommagees suite a tempete. Maison a Dunkerque.'
+    },
+    {
+      before: '/images/services/reparation-avant-2.webp',
+      after: '/images/services/reparation-apres-2.webp',
+      title: 'Reparation fuite toiture',
+      description: 'Intervention rapide sur fuite importante. Villa a Calais.'
+    }
+  ],
+  'renovation-toiture': [
+    {
+      before: '/images/gallery/realisation-01-avant.webp',
+      after: '/images/gallery/realisation-01-apres.webp',
+      title: 'Renovation complete',
+      description: 'Remplacement total couverture avec nouvelles tuiles. Dunkerque.'
+    }
+  ],
+  'demoussage': [
+    {
+      before: '/images/gallery/realisation-02-avant.webp',
+      after: '/images/gallery/realisation-02-apres.webp',
+      title: 'Demoussage professionnel',
+      description: 'Nettoyage et traitement hydrofuge complet. Gravelines.'
+    }
+  ],
+  'zinguerie': [
+    {
+      before: '/images/gallery/realisation-03-avant.webp',
+      after: '/images/gallery/realisation-03-apres.webp',
+      title: 'Remplacement zinguerie',
+      description: 'Installation nouvelles gouttieres et faitages. Grande-Synthe.'
+    }
+  ],
+  'isolation': [
+    {
+      before: '/images/services/isolation-avant.webp',
+      after: '/images/services/isolation-apres.webp',
+      title: 'Isolation combles',
+      description: 'Isolation thermique performante. Economies energie garanties.'
+    }
+  ],
+  'urgence': [
+    {
+      before: '/images/services/urgence-avant.webp',
+      after: '/images/services/urgence-apres.webp',
+      title: 'Intervention urgence',
+      description: 'Bache de protection et reparation rapide apres tempete.'
+    }
+  ]
+};
+
+// Prix specifiques par service
+const servicePrices: Record<string, Array<{service: string; priceRange: string; description: string; features: string[]}>> = {
+  'reparation-toiture': [
+    {
+      service: 'Reparation simple',
+      priceRange: '150 - 500',
+      description: 'Quelques tuiles a remplacer',
+      features: ['Diagnostic inclus', 'Remplacement tuiles', 'Garantie 2 ans']
+    },
+    {
+      service: 'Reparation moyenne',
+      priceRange: '500 - 1500',
+      description: 'Reparation etendue ou fuite',
+      features: ['Recherche fuite', 'Reparation complete', 'Garantie decennale']
+    },
+    {
+      service: 'Reparation importante',
+      priceRange: '1500 - 3000',
+      description: 'Degats suite tempete',
+      features: ['Bache protection', 'Reparation structurelle', 'Dossier assurance']
+    }
+  ],
+  'renovation-toiture': [
+    {
+      service: 'Renovation partielle',
+      priceRange: '50 - 80',
+      description: 'Par m2, une partie du toit',
+      features: ['Depose ancienne toiture', 'Nouvelle couverture', 'Garantie 10 ans']
+    },
+    {
+      service: 'Renovation complete',
+      priceRange: '80 - 150',
+      description: 'Par m2, toiture entiere',
+      features: ['Depose totale', 'Charpente verifiee', 'Garantie decennale']
+    },
+    {
+      service: 'Renovation premium',
+      priceRange: '150 - 250',
+      description: 'Par m2, materiaux haut de gamme',
+      features: ['Tuiles premium', 'Isolation renforcee', 'Garantie etendue']
+    }
+  ],
+  'demoussage': [
+    {
+      service: 'Demoussage simple',
+      priceRange: '10 - 15',
+      description: 'Par m2, nettoyage basique',
+      features: ['Nettoyage mousse', 'Rinçage', 'Inspection visuelle']
+    },
+    {
+      service: 'Demoussage complet',
+      priceRange: '15 - 20',
+      description: 'Par m2, traitement inclus',
+      features: ['Nettoyage approfondi', 'Traitement anti-mousse', 'Protection 3 ans']
+    },
+    {
+      service: 'Demoussage premium',
+      priceRange: '20 - 25',
+      description: 'Par m2, hydrofuge longue duree',
+      features: ['Nettoyage complet', 'Hydrofuge premium', 'Protection 5 ans']
+    }
+  ],
+  'zinguerie': [
+    {
+      service: 'Gouttieres PVC',
+      priceRange: '40 - 60',
+      description: 'Par metre lineaire',
+      features: ['Depose ancienne', 'Pose PVC', 'Garantie 5 ans']
+    },
+    {
+      service: 'Gouttieres zinc',
+      priceRange: '80 - 120',
+      description: 'Par metre lineaire',
+      features: ['Depose ancienne', 'Pose zinc', 'Garantie 10 ans']
+    },
+    {
+      service: 'Zinguerie complete',
+      priceRange: 'Sur devis',
+      description: 'Gouttieres, faitages, solins',
+      features: ['Etude personnalisee', 'Pose complete', 'Garantie decennale']
+    }
+  ],
+  'isolation': [
+    {
+      service: 'Isolation combles perdus',
+      priceRange: '20 - 40',
+      description: 'Par m2, laine minerale',
+      features: ['Soufflage isolant', 'R=7 minimum', 'Aides eligibles']
+    },
+    {
+      service: 'Isolation rampants',
+      priceRange: '40 - 80',
+      description: 'Par m2, sous toiture',
+      features: ['Pose isolant', 'Pare-vapeur', 'Aides eligibles']
+    },
+    {
+      service: 'Isolation sarking',
+      priceRange: '100 - 180',
+      description: 'Par m2, isolation exterieure',
+      features: ['Performance maximale', 'Espace preserve', 'Aides eligibles']
+    }
+  ],
+  'urgence': [
+    {
+      service: 'Intervention urgence',
+      priceRange: '300 - 800',
+      description: 'Selon jour/heure',
+      features: ['Deplacement rapide', 'Bache protection', 'Securisation']
+    },
+    {
+      service: 'Reparation provisoire',
+      priceRange: '500 - 1500',
+      description: 'En attendant travaux definitifs',
+      features: ['Reparation temporaire', 'Suivi intervention', 'Devis definitif']
+    },
+    {
+      service: 'Reparation definitive',
+      priceRange: 'Sur devis',
+      description: 'Reparation complete',
+      features: ['Travaux definitifs', 'Garantie decennale', 'Dossier assurance']
+    }
+  ]
+};
+
+const galleryItems = serviceGalleries[service.slug] || [];
+const priceItems = servicePrices[service.slug] || [];
+
 const structuredData = generateServiceSchema({
   name: service.name,
   description: service.description,
@@ -148,6 +336,21 @@ const structuredData = generateServiceSchema({
             Demander un devis
           </Button>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image principale du service -->
+  <section class="service-image-section">
+    <div class="container">
+      <div class="service-image-wrapper">
+        <img
+          src={`/images/services/service-${service.slug}.webp`}
+          alt={`${service.name} a Dunkerque - Couvreur Boutantin`}
+          width="1200"
+          height="600"
+          loading="eager"
+        />
       </div>
     </div>
   </section>
@@ -245,6 +448,28 @@ const structuredData = generateServiceSchema({
     </div>
   </section>
 
+  <!-- Galerie de realisations -->
+  {galleryItems.length > 0 && (
+    <Gallery
+      items={galleryItems}
+      title={`Nos realisations en ${service.name.toLowerCase()}`}
+      subtitle="Exemples de nos interventions recentes"
+    />
+  )}
+
+  <!-- Processus d'intervention -->
+  <ProcessSteps title={`Comment se deroule votre ${service.name.toLowerCase()} ?`} />
+
+  <!-- Tarifs indicatifs -->
+  {priceItems.length > 0 && (
+    <PriceRange
+      title={`Tarifs ${service.name.toLowerCase()}`}
+      items={priceItems}
+      disclaimer="Tarifs indicatifs hors taxe. Chaque projet est unique, nous vous proposons un devis personnalise gratuit apres diagnostic sur place."
+    />
+  )}
+
+  <!-- FAQ -->
   <section class="section faq-section">
     <div class="container">
       <FAQ items={faqItems} title={`Questions frequentes sur la ${service.name.toLowerCase()}`} />
@@ -273,6 +498,25 @@ const structuredData = generateServiceSchema({
 </BaseLayout>
 
 <style>
+  .service-image-section {
+    padding: 0;
+    background-color: var(--color-gray-100);
+  }
+
+  .service-image-wrapper {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .service-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    max-height: 500px;
+  }
+
   .page-header {
     background-color: var(--color-primary);
     color: var(--color-white);
