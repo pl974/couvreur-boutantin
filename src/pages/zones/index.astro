@@ -1,11 +1,12 @@
 ---
 /**
  * Page index des zones d'intervention
- * Liste toutes les villes couvertes
+ * Liste toutes les villes couvertes avec images
+ * Optimise pour le SEO local
  */
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import CityCard from '../../components/CityCard.astro';
+import CityCardImage from '../../components/CityCardImage.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import { cities } from '../../utils/seo';
 ---
@@ -15,6 +16,8 @@ import { cities } from '../../utils/seo';
   description="Couvreur intervenant sur Dunkerque, Calais, Gravelines, Grande-Synthe et tout le littoral nord. Reparation et renovation de toiture. Devis gratuit."
 >
   <section class="page-header">
+    <div class="page-header-bg" style="background-image: url('/images/hero/hero-toiture-renovation.webp')"></div>
+    <div class="page-header-overlay"></div>
     <div class="container">
       <h1>Nos zones d'intervention</h1>
       <p>
@@ -28,9 +31,10 @@ import { cities } from '../../utils/seo';
     <div class="container">
       <div class="grid grid-2">
         {cities.map(city => (
-          <CityCard
+          <CityCardImage
             name={city.name}
             description={city.shortDescription}
+            image={city.image}
             href={`/zones/${city.slug}/`}
             postalCode={city.postalCode}
           />
@@ -106,10 +110,33 @@ import { cities } from '../../utils/seo';
 
 <style>
   .page-header {
-    background-color: var(--color-primary);
+    position: relative;
     color: var(--color-white);
     padding: var(--spacing-3xl) 0;
     text-align: center;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+  }
+
+  .page-header-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+
+  .page-header-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(30, 58, 95, 0.92) 0%, rgba(30, 58, 95, 0.85) 100%);
+    z-index: 1;
+  }
+
+  .page-header .container {
+    position: relative;
+    z-index: 2;
   }
 
   .page-header h1 {

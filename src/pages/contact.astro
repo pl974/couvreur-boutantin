@@ -13,6 +13,8 @@ import ContactForm from '../components/ContactForm.astro';
   description="Contactez Couvreur Boutantin pour un devis gratuit. Artisan couvreur a Dunkerque, intervention sur tout le littoral nord. Reponse sous 24h."
 >
   <section class="page-header">
+    <div class="page-header-bg" style="background-image: url('/images/about/equipe-couvreurs.webp')"></div>
+    <div class="page-header-overlay"></div>
     <div class="container">
       <h1>Contactez-nous</h1>
       <p>
@@ -150,10 +152,33 @@ import ContactForm from '../components/ContactForm.astro';
 
 <style>
   .page-header {
-    background-color: var(--color-primary);
+    position: relative;
     color: var(--color-white);
     padding: var(--spacing-3xl) 0;
     text-align: center;
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+  }
+
+  .page-header-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+
+  .page-header-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(30, 58, 95, 0.92) 0%, rgba(30, 58, 95, 0.85) 100%);
+    z-index: 1;
+  }
+
+  .page-header .container {
+    position: relative;
+    z-index: 2;
   }
 
   .page-header h1 {

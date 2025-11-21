@@ -2,10 +2,11 @@
 /**
  * Page index des services
  * Liste tous les services de couverture proposes
+ * Utilise les cartes avec images pour un impact visuel maximum
  */
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ServiceCard from '../../components/ServiceCard.astro';
+import ServiceCardImage from '../../components/ServiceCardImage.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import { services } from '../../utils/seo';
 ---
@@ -15,6 +16,8 @@ import { services } from '../../utils/seo';
   description="Decouvrez tous nos services de couverture a Dunkerque : reparation, renovation, demoussage, zinguerie, isolation. Artisan certifie RGE, devis gratuit."
 >
   <section class="page-header">
+    <div class="page-header-bg" style="background-image: url('/images/hero/hero-couvreur-travail.webp')"></div>
+    <div class="page-header-overlay"></div>
     <div class="container">
       <h1>Nos services de couverture</h1>
       <p>
@@ -29,11 +32,12 @@ import { services } from '../../utils/seo';
     <div class="container">
       <div class="grid grid-3">
         {services.map(service => (
-          <ServiceCard
+          <ServiceCardImage
             title={service.name}
             description={service.shortDescription}
-            icon={service.icon}
+            image={service.image}
             href={`/services/${service.slug}/`}
+            badge={service.badge}
           />
         ))}
       </div>
@@ -113,10 +117,33 @@ import { services } from '../../utils/seo';
 
 <style>
   .page-header {
-    background-color: var(--color-primary);
+    position: relative;
     color: var(--color-white);
     padding: var(--spacing-3xl) 0;
     text-align: center;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+  }
+
+  .page-header-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+
+  .page-header-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(30, 58, 95, 0.92) 0%, rgba(30, 58, 95, 0.85) 100%);
+    z-index: 1;
+  }
+
+  .page-header .container {
+    position: relative;
+    z-index: 2;
   }
 
   .page-header h1 {
