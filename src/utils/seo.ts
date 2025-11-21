@@ -240,7 +240,7 @@ export const blogArticles = [
     readTime: '8 min',
     content: `
 <h2>Identifier rapidement l'origine de la fuite</h2>
-<p>Une <strong>fuite de toiture</strong> se manifeste generalement par des taches d'humidite au plafond ou des gouttes d'eau. L'origine n'est pas toujours situee juste au-dessus de la tache visible. L'eau peut en effet cheminer le long des elements de charpente avant de penetrer dans votre habitation.</p>
+<p>Une <strong>fuite de toiture</strong> se manifeste generalement par des taches d'humidite au plafond ou des gouttes d'eau. L'origine n'est pas toujours situee juste au-dessus de la tache visible. L'eau peut en effet cheminer le long des elements de charpente avant de penetrer dans votre habitation. Notre service de <a href="/services/reparation-toiture/">reparation de toiture</a> intervient rapidement pour diagnostiquer et resoudre ces problemes.</p>
 
 <h3>Les signes qui ne trompent pas</h3>
 <p>Plusieurs indices revelent une infiltration d'eau par le toit :</p>
@@ -248,7 +248,7 @@ export const blogArticles = [
 <li><strong>Taches brunâtres</strong> au plafond qui s'agrandissent apres la pluie</li>
 <li><strong>Peinture qui cloque</strong> ou se decolle</li>
 <li><strong>Odeur de moisi</strong> dans les combles</li>
-<li><strong>Gouttieres debordantes</strong> ou mal fixees</li>
+<li><strong>Gouttieres debordantes</strong> ou mal fixees (voir notre service <a href="/services/zinguerie/">zinguerie</a>)</li>
 <li><strong>Tuiles cassees</strong> visibles depuis le sol</li>
 </ul>
 
@@ -313,9 +313,9 @@ export const blogArticles = [
 </ul>
 
 <h2>Votre toiture fuit a Dunkerque ?</h2>
-<p>Notre equipe de couvreurs intervient <strong>sous 24 a 48h</strong> sur Dunkerque et tout le littoral nord. Nous proposons un diagnostic gratuit et un devis detaille sans engagement. Nos reparations sont garanties par notre assurance decennale.</p>
+<p>Notre equipe de couvreurs intervient <strong>sous 24 a 48h</strong> sur <a href="/zones/dunkerque/">Dunkerque</a> et tout le littoral nord : <a href="/zones/calais/">Calais</a>, <a href="/zones/gravelines/">Gravelines</a>, <a href="/zones/grande-synthe/">Grande-Synthe</a>, <a href="/zones/coudekerque/">Coudekerque-Branche</a> et <a href="/zones/saint-pol-sur-mer/">Saint-Pol-sur-Mer</a>. Nous proposons un diagnostic gratuit et un devis detaille sans engagement. Nos reparations sont garanties par notre assurance decennale.</p>
 
-<p>Contactez-nous au <strong>03 28 00 00 00</strong> ou demandez votre devis en ligne. Nous intervenons egalement en urgence le week-end pour les situations critiques.</p>
+<p>Contactez-nous au <strong>03 28 00 00 00</strong> ou demandez votre devis en ligne. Nous intervenons egalement en <a href="/services/urgence/">urgence le week-end</a> pour les situations critiques. Decouvrez aussi notre guide sur les <a href="/blog/prix-renovation-toiture-2024/">prix de renovation toiture</a> si vos degats necessitent des travaux plus importants.</p>
 `
   },
   {
@@ -329,7 +329,7 @@ export const blogArticles = [
     readTime: '10 min',
     content: `
 <h2>Prix moyen d'une renovation de toiture au m2</h2>
-<p>Le cout d'une <strong>renovation de toiture</strong> en 2024 varie entre <strong>80 et 250 EUR par m2</strong>. Ce prix depend du type de couverture, de l'etat de la charpente et des travaux annexes necessaires.</p>
+<p>Le cout d'une <strong><a href="/services/renovation-toiture/">renovation de toiture</a></strong> en 2024 varie entre <strong>80 et 250 EUR par m2</strong>. Ce prix depend du type de couverture, de l'etat de la charpente et des travaux annexes necessaires.</p>
 
 <p>Pour une maison standard de 100 m2 de toiture, prevoyez un budget entre <strong>8 000 et 25 000 EUR</strong>. Ce tarif comprend la depose de l'ancienne couverture, la fourniture des materiaux et la pose par un professionnel.</p>
 
@@ -356,8 +356,8 @@ export const blogArticles = [
 <h3>Les travaux complementaires</h3>
 <p>La renovation de toiture s'accompagne souvent de travaux annexes :</p>
 <ul>
-<li><strong>Isolation des combles :</strong> 20 a 80 EUR/m2</li>
-<li><strong>Remplacement des gouttieres :</strong> 40 a 100 EUR/ml</li>
+<li><strong><a href="/services/isolation/">Isolation des combles</a> :</strong> 20 a 80 EUR/m2</li>
+<li><strong>Remplacement des <a href="/services/zinguerie/">gouttieres</a> :</strong> 40 a 100 EUR/ml</li>
 <li><strong>Pose de fenetres de toit :</strong> 500 a 1 500 EUR par fenetre</li>
 <li><strong>Installation d'une VMC :</strong> 400 a 1 200 EUR</li>
 </ul>
@@ -413,9 +413,9 @@ export const blogArticles = [
 <blockquote>"Un toit bien renove vous protege pendant 50 ans. Ne negligez pas la qualite des materiaux et de la pose pour economiser quelques euros." - Couvreur Boutantin</blockquote>
 
 <h2>Renovation de toiture a Dunkerque</h2>
-<p>Notre entreprise realise des renovations de toiture depuis plus de 15 ans sur le littoral nord. Nous intervenons a <strong>Dunkerque, Calais, Gravelines</strong> et toutes les communes environnantes.</p>
+<p>Notre entreprise realise des renovations de toiture depuis plus de 15 ans sur le littoral nord. Nous intervenons a <strong><a href="/zones/dunkerque/">Dunkerque</a>, <a href="/zones/calais/">Calais</a>, <a href="/zones/gravelines/">Gravelines</a></strong>, <a href="/zones/bray-dunes/">Bray-Dunes</a>, <a href="/zones/loon-plage/">Loon-Plage</a> et toutes les communes environnantes.</p>
 
-<p>Artisan certifie <strong>RGE Qualibat</strong>, nous vous accompagnons dans vos demarches d'aides financieres. Demandez votre devis gratuit au 03 28 00 00 00.</p>
+<p>Artisan certifie <strong>RGE Qualibat</strong>, nous vous accompagnons dans vos demarches d'aides financieres. Demandez votre devis gratuit au 03 28 00 00 00. Consultez aussi notre article sur <a href="/blog/comment-reparer-fuite-toiture/">comment reparer une fuite de toiture</a> pour les petites interventions.</p>
 `
   },
   {
@@ -429,14 +429,14 @@ export const blogArticles = [
     readTime: '6 min',
     content: `
 <h2>Pourquoi la mousse est nocive pour votre toit</h2>
-<p>La <strong>mousse sur une toiture</strong> n'est pas qu'un probleme esthetique. Elle retient l'humidite contre les tuiles et accelere leur degradation. Dans le Nord, le climat humide favorise particulierement son developpement.</p>
+<p>La <strong>mousse sur une toiture</strong> n'est pas qu'un probleme esthetique. Elle retient l'humidite contre les tuiles et accelere leur degradation. Dans le Nord, le climat humide favorise particulierement son developpement. Notre service de <a href="/services/demoussage/">demoussage professionnel</a> traite efficacement ce probleme.</p>
 
 <p>Une toiture envahie par la mousse presente plusieurs risques :</p>
 <ul>
 <li><strong>Porosite des tuiles</strong> qui les rend gelives en hiver</li>
-<li><strong>Infiltrations</strong> car l'eau stagne sous la vegetation</li>
+<li><strong>Infiltrations</strong> car l'eau stagne sous la vegetation (voir <a href="/blog/comment-reparer-fuite-toiture/">comment reparer une fuite</a>)</li>
 <li><strong>Decollement des tuiles</strong> sous l'effet des racines</li>
-<li><strong>Obstruction des gouttieres</strong> par les debris vegetaux</li>
+<li><strong>Obstruction des <a href="/services/zinguerie/">gouttieres</a></strong> par les debris vegetaux</li>
 </ul>
 
 <h2>Les signes qui indiquent un demoussage necessaire</h2>
@@ -519,9 +519,9 @@ export const blogArticles = [
 <p>Un hydrofuge de qualite professionnelle offre une <strong>protection de 5 a 10 ans</strong>. Les produits colores peuvent egalement raviver l'aspect de tuiles ternies.</p>
 
 <h2>Demoussage de toiture dans le Nord</h2>
-<p>Notre equipe intervient pour le <strong>demoussage de toiture</strong> a Dunkerque, Calais, Gravelines et sur tout le littoral. Nous utilisons des produits <strong>respectueux de l'environnement</strong> et adaptes aux tuiles de la region.</p>
+<p>Notre equipe intervient pour le <strong>demoussage de toiture</strong> a <a href="/zones/dunkerque/">Dunkerque</a>, <a href="/zones/calais/">Calais</a>, <a href="/zones/gravelines/">Gravelines</a>, <a href="/zones/grande-synthe/">Grande-Synthe</a>, <a href="/zones/coudekerque/">Coudekerque-Branche</a>, <a href="/zones/bray-dunes/">Bray-Dunes</a> et sur tout le littoral. Nous utilisons des produits <strong>respectueux de l'environnement</strong> et adaptes aux tuiles de la region.</p>
 
-<p>Demandez votre devis gratuit au 03 28 00 00 00. Nous evaluons l'etat de votre toiture et vous conseillons sur les traitements les plus adaptes.</p>
+<p>Demandez votre devis gratuit au 03 28 00 00 00. Nous evaluons l'etat de votre toiture et vous conseillons sur les traitements les plus adaptes. Si votre toiture necessite une refection complete, consultez notre guide sur les <a href="/blog/prix-renovation-toiture-2024/">prix de renovation toiture 2024</a>.</p>
 `
   }
 ];
