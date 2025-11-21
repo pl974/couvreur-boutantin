@@ -1,0 +1,580 @@
+---
+/**
+ * Page A propos - Couvreur Boutantin
+ * Presentation de l'entreprise, equipe et valeurs
+ * Importante pour E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness)
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Button from '../components/Button.astro';
+import Stats from '../components/Stats.astro';
+
+// Schema Organization pour renforcer l'identite de l'entreprise
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "RoofingContractor",
+  "name": "Couvreur Boutantin",
+  "description": "Entreprise de couverture a Dunkerque specialisee dans la reparation, renovation et entretien de toiture depuis plus de 15 ans.",
+  "url": "https://couvreur-boutantin.fr",
+  "logo": "https://couvreur-boutantin.fr/images/about/certification-rge.webp",
+  "image": "https://couvreur-boutantin.fr/images/about/equipe-couvreurs.webp",
+  "telephone": "+33328000000",
+  "email": "contact@couvreur-boutantin.fr",
+  "foundingDate": "2009",
+  "numberOfEmployees": {
+    "@type": "QuantitativeValue",
+    "value": 8
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Rue de la Toiture",
+    "addressLocality": "Dunkerque",
+    "postalCode": "59140",
+    "addressCountry": "FR"
+  },
+  "areaServed": {
+    "@type": "GeoCircle",
+    "geoMidpoint": {
+      "@type": "GeoCoordinates",
+      "latitude": 51.0343,
+      "longitude": 2.3768
+    },
+    "geoRadius": "30000"
+  },
+  "hasCredential": [
+    {
+      "@type": "EducationalOccupationalCredential",
+      "credentialCategory": "certification",
+      "name": "RGE Qualibat"
+    },
+    {
+      "@type": "EducationalOccupationalCredential",
+      "credentialCategory": "insurance",
+      "name": "Garantie Decennale"
+    }
+  ],
+  "knowsAbout": [
+    "Reparation de toiture",
+    "Renovation de couverture",
+    "Demoussage",
+    "Zinguerie",
+    "Isolation thermique",
+    "Intervention urgence toiture"
+  ]
+};
+---
+
+<BaseLayout
+  title="A propos - Couvreur Boutantin Dunkerque"
+  description="Decouvrez Couvreur Boutantin, entreprise de couverture a Dunkerque depuis plus de 15 ans. Equipe qualifiee, certification RGE, garantie decennale."
+  structuredData={organizationSchema}
+>
+  <Breadcrumb items={[{ label: 'A propos' }]} />
+
+  <section class="page-header">
+    <div class="page-header-bg" style="background-image: url('/images/about/equipe-couvreurs.webp')"></div>
+    <div class="page-header-overlay"></div>
+    <div class="container">
+      <h1>A propos de Couvreur Boutantin</h1>
+      <p>
+        Depuis plus de 15 ans, nous mettons notre expertise au service
+        des habitants de Dunkerque et du littoral nord.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section Histoire -->
+  <section class="section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-content">
+          <h2>Notre histoire</h2>
+          <p>
+            Fondee en 2009, l'entreprise <strong>Couvreur Boutantin</strong> est nee
+            de la passion d'un artisan pour le metier de couvreur. Apres plusieurs
+            annees d'experience aupres de grands noms de la couverture dans le Nord,
+            notre fondateur a decide de creer sa propre structure pour offrir un
+            service de proximite et de qualite aux habitants de Dunkerque.
+          </p>
+          <p>
+            Depuis, l'entreprise n'a cesse de se developper, passant d'un artisan
+            seul a une equipe de 8 professionnels qualifies. Cette croissance
+            s'est faite dans le respect de nos valeurs fondatrices : qualite du
+            travail, relation de confiance avec nos clients et expertise technique.
+          </p>
+          <p>
+            Aujourd'hui, nous intervenons sur plus de 300 chantiers par an,
+            de la simple reparation de tuiles a la renovation complete de toiture,
+            en passant par l'isolation des combles et les travaux de zinguerie.
+          </p>
+        </div>
+        <div class="about-image">
+          <img
+            src="/images/about/artisan-couvreur.webp"
+            alt="Artisan couvreur Boutantin au travail"
+            width="500"
+            height="400"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistiques -->
+  <Stats />
+
+  <!-- Section Equipe -->
+  <section class="section team-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Notre equipe</h2>
+        <p>
+          Une equipe de professionnels qualifies et passionnes par leur metier.
+        </p>
+      </div>
+
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-image">
+            <img
+              src="/images/about/artisan-couvreur.webp"
+              alt="Chef d'equipe couvreur"
+              width="300"
+              height="300"
+              loading="lazy"
+            />
+          </div>
+          <h3>Direction et gestion</h3>
+          <p>
+            Notre direction assure le suivi de chaque chantier et reste votre
+            interlocuteur privilegie du premier contact a la fin des travaux.
+          </p>
+        </div>
+
+        <div class="team-card">
+          <div class="team-image">
+            <img
+              src="/images/about/equipe-couvreurs.webp"
+              alt="Equipe de couvreurs professionnels"
+              width="300"
+              height="300"
+              loading="lazy"
+            />
+          </div>
+          <h3>Couvreurs qualifies</h3>
+          <p>
+            Nos couvreurs sont tous titulaires d'un CAP/BEP couverture minimum
+            et beneficient de formations continues sur les nouvelles techniques.
+          </p>
+        </div>
+
+        <div class="team-card">
+          <div class="team-image">
+            <img
+              src="/images/about/certification-rge.webp"
+              alt="Certification RGE Qualibat"
+              width="300"
+              height="300"
+              loading="lazy"
+            />
+          </div>
+          <h3>Certifications</h3>
+          <p>
+            L'entreprise est certifiee RGE Qualibat, garantissant la qualite
+            de nos interventions et l'acces aux aides financieres pour nos clients.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Valeurs -->
+  <section class="section values-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Nos valeurs</h2>
+        <p>
+          Les principes qui guident notre travail au quotidien.
+        </p>
+      </div>
+
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <h3>Qualite</h3>
+          <p>
+            Chaque chantier est realise dans les regles de l'art, avec des
+            materiaux de qualite et un souci du detail constant.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3>Proximite</h3>
+          <p>
+            Entreprise locale, nous connaissons parfaitement les toitures
+            de la region et les contraintes du climat littoral.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+          </div>
+          <h3>Confiance</h3>
+          <p>
+            Devis detaille, prix transparents, respect des delais et
+            garantie decennale pour votre tranquillite d'esprit.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <h3>Reactivite</h3>
+          <p>
+            Devis sous 24h, intervention rapide et service d'urgence
+            pour les situations critiques.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Engagement environnemental -->
+  <section class="section eco-section">
+    <div class="container">
+      <div class="eco-grid">
+        <div class="eco-image">
+          <img
+            src="/images/services/isolation-combles.webp"
+            alt="Isolation de toiture - Engagement environnemental"
+            width="500"
+            height="400"
+            loading="lazy"
+          />
+        </div>
+        <div class="eco-content">
+          <h2>Notre engagement environnemental</h2>
+          <p>
+            En tant qu'artisan certifie <strong>RGE (Reconnu Garant de l'Environnement)</strong>,
+            nous nous engageons a promouvoir la renovation energetique et a accompagner
+            nos clients dans leurs projets d'isolation.
+          </p>
+          <ul>
+            <li>Utilisation de materiaux eco-responsables quand possible</li>
+            <li>Tri et recyclage des dechets de chantier</li>
+            <li>Conseils pour reduire la consommation energetique</li>
+            <li>Accompagnement dans les demarches d'aides financieres</li>
+          </ul>
+          <p>
+            Notre certification RGE vous permet de beneficier des aides de l'Etat :
+            MaPrimeRenov', CEE, eco-PTZ pour vos travaux d'isolation.
+          </p>
+          <Button href="/services/isolation/" variant="primary">
+            En savoir plus sur l'isolation
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="section cta-section">
+    <div class="container">
+      <div class="final-cta">
+        <h2>Besoin d'un couvreur de confiance ?</h2>
+        <p>
+          Contactez-nous pour discuter de votre projet. Nous vous proposons
+          un devis gratuit et personnalise sous 24h.
+        </p>
+        <div class="cta-buttons">
+          <Button href="tel:+33328000000" variant="primary" size="lg">
+            Appeler le 03 28 00 00 00
+          </Button>
+          <Button href="/contact/" variant="secondary" size="lg">
+            Demander un devis
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    position: relative;
+    color: var(--color-white);
+    padding: var(--spacing-3xl) 0;
+    text-align: center;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+  }
+
+  .page-header-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+
+  .page-header-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(30, 58, 95, 0.92) 0%, rgba(30, 58, 95, 0.85) 100%);
+    z-index: 1;
+  }
+
+  .page-header .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .page-header h1 {
+    color: var(--color-white);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .page-header p {
+    color: var(--color-gray-200);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* About Grid */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-3xl);
+    align-items: center;
+  }
+
+  .about-content h2 {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .about-content p {
+    color: var(--color-gray-700);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+  }
+
+  /* Team Section */
+  .team-section {
+    background-color: var(--color-gray-50);
+  }
+
+  .section-title {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .section-title h2 {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section-title p {
+    color: var(--color-gray-600);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-xl);
+  }
+
+  .team-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+  }
+
+  .team-image {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto var(--spacing-lg);
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .team-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .team-card h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .team-card p {
+    color: var(--color-gray-600);
+    font-size: var(--text-sm);
+  }
+
+  /* Values Section */
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-xl);
+  }
+
+  .value-card {
+    text-align: center;
+    padding: var(--spacing-xl);
+  }
+
+  .value-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--spacing-lg);
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+  }
+
+  .value-card h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .value-card p {
+    color: var(--color-gray-600);
+    font-size: var(--text-sm);
+  }
+
+  /* Eco Section */
+  .eco-section {
+    background-color: var(--color-gray-50);
+  }
+
+  .eco-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-3xl);
+    align-items: center;
+  }
+
+  .eco-image img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .eco-content h2 {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .eco-content p {
+    color: var(--color-gray-700);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .eco-content ul {
+    padding-left: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .eco-content li {
+    color: var(--color-gray-700);
+    padding: var(--spacing-xs) 0;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background-color: var(--color-primary);
+  }
+
+  .final-cta {
+    text-align: center;
+    color: var(--color-white);
+  }
+
+  .final-cta h2 {
+    color: var(--color-white);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .final-cta p {
+    color: var(--color-gray-200);
+    margin-bottom: var(--spacing-xl);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 1024px) {
+    .about-grid,
+    .eco-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-image,
+    .eco-image {
+      order: -1;
+    }
+
+    .team-grid {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .values-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .values-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -30,6 +30,34 @@ export function generateServiceSchema(service: {
 }
 
 /**
+ * Genere les donnees structurees HowTo pour les pages services
+ * Ameliore les chances d'apparaitre en position 0 (featured snippets)
+ */
+export function generateHowToSchema(service: {
+  name: string;
+  steps: Array<{ name: string; text: string }>;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": `Comment obtenir une ${service.name.toLowerCase()} a Dunkerque`,
+    "description": `Guide pour faire realiser une ${service.name.toLowerCase()} par un professionnel a Dunkerque`,
+    "totalTime": "PT48H",
+    "estimatedCost": {
+      "@type": "MonetaryAmount",
+      "currency": "EUR",
+      "value": "Devis gratuit"
+    },
+    "step": service.steps.map((step, index) => ({
+      "@type": "HowToStep",
+      "position": index + 1,
+      "name": step.name,
+      "text": step.text
+    }))
+  };
+}
+
+/**
  * Genere les donnees structurees pour une page de ville
  */
 export function generateCitySchema(city: {

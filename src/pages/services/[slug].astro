@@ -13,7 +13,7 @@ import Gallery from '../../components/Gallery.astro';
 import PriceRange from '../../components/PriceRange.astro';
 import ProcessSteps from '../../components/ProcessSteps.astro';
 import RelatedZones from '../../components/RelatedZones.astro';
-import { services, generateServiceSchema } from '../../utils/seo';
+import { services, generateServiceSchema, generateHowToSchema } from '../../utils/seo';
 
 export function getStaticPaths() {
   return services.map(service => ({
@@ -317,6 +317,16 @@ const structuredData = generateServiceSchema({
   description: service.description,
   url: `https://couvreur-boutantin.fr/services/${service.slug}/`
 });
+
+// HowTo schema pour position 0
+const howToSteps = [
+  { name: 'Contact', text: 'Appelez-nous au 03 28 00 00 00 ou remplissez le formulaire en ligne pour decrire votre besoin.' },
+  { name: 'Rendez-vous', text: 'Nous convenons d\'un rendez-vous gratuit pour evaluer votre toiture sur place.' },
+  { name: 'Devis detaille', text: 'Vous recevez un devis detaille sous 24h avec les differentes options possibles.' },
+  { name: 'Planification', text: 'Une fois le devis accepte, nous planifions l\'intervention selon vos disponibilites.' },
+  { name: 'Realisation', text: 'Nos couvreurs qualifies realisent les travaux dans les regles de l\'art.' }
+];
+const howToSchema = generateHowToSchema({ name: service.name, steps: howToSteps });
 ---
 
 <BaseLayout
@@ -328,6 +338,9 @@ const structuredData = generateServiceSchema({
     { label: 'Services', href: '/services/' },
     { label: service.name }
   ]} />
+
+  <!-- HowTo Schema pour position 0 -->
+  <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
 
   <section class="page-header">
     <div class="page-header-bg" style={`background-image: url(${service.image})`}></div>
