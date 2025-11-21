@@ -21,7 +21,7 @@ const {
   title,
   description,
   canonical = Astro.url.href,
-  ogImage = '/images/og-default.webp',
+  ogImage = '/images/hero/hero-toiture-dunkerque.webp',
   noindex = false,
   structuredData
 } = Astro.props;
@@ -35,6 +35,8 @@ const localBusinessSchema = {
   "@type": "RoofingContractor",
   "name": "Couvreur Boutantin",
   "description": "Artisan couvreur professionnel a Dunkerque. Reparation, renovation et entretien de toiture dans le Nord.",
+  "image": "https://couvreur-boutantin.fr/images/hero/hero-toiture-dunkerque.webp",
+  "logo": "https://couvreur-boutantin.fr/images/about/certification-rge.webp",
   "url": "https://couvreur-boutantin.fr",
   "telephone": "+33328000000",
   "email": "contact@couvreur-boutantin.fr",
