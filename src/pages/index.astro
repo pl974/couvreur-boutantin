@@ -19,7 +19,13 @@ import ContactForm from '../components/ContactForm.astro';
 import Button from '../components/Button.astro';
 import CTAFloat from '../components/CTAFloat.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
-import { services, cities } from '../utils/seo';
+import BlogCard from '../components/BlogCard.astro';
+import { services, cities, blogArticles } from '../utils/seo';
+
+// 3 derniers articles pour la homepage
+const latestArticles = [...blogArticles]
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  .slice(0, 3);
 
 const faqItems = [
   {
@@ -323,6 +329,39 @@ const galleryItems = [
     </div>
   </section>
 
+  <!-- Section Derniers Articles -->
+  <section class="section blog-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Nos derniers articles</h2>
+        <p>
+          Conseils d'experts, guides pratiques et actualites pour entretenir
+          et proteger votre toiture.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        {latestArticles.map(article => (
+          <BlogCard
+            title={article.title}
+            excerpt={article.excerpt}
+            image={article.image}
+            slug={article.slug}
+            date={article.date}
+            category={article.category}
+            readTime={article.readTime}
+          />
+        ))}
+      </div>
+
+      <div class="section-cta">
+        <Button href="/blog/" variant="outline">
+          Voir tous les articles
+        </Button>
+      </div>
+    </div>
+  </section>
+
   <!-- Contenu SEO supplementaire -->
   <section class="section seo-content">
     <div class="container">
@@ -551,6 +590,11 @@ const galleryItems = [
     background-color: var(--color-white);
     border-radius: var(--radius-lg);
     padding: var(--spacing-xl);
+  }
+
+  /* Section Blog */
+  .blog-section {
+    background-color: var(--color-white);
   }
 
   /* Section SEO */
