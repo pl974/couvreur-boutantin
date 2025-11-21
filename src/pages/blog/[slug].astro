@@ -1,8 +1,8 @@
 ---
 /**
  * Template dynamique pour les articles de blog
- * Genere une page pour chaque article
- * Schema Article pour SEO
+ * Supporte le contenu riche avec H2, H3, listes, tableaux
+ * Schema Article pour SEO position 0
  */
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
@@ -20,18 +20,16 @@ export function getStaticPaths() {
 
 const { article } = Astro.props;
 
-// Articles similaires (meme categorie, exclure l'actuel)
+// Articles similaires
 const relatedArticles = blogArticles
   .filter(a => a.category === article.category && a.slug !== article.slug)
   .slice(0, 2);
 
-// Si pas assez d'articles de meme categorie, completer avec d'autres
 const otherArticles = relatedArticles.length < 2
   ? blogArticles.filter(a => a.slug !== article.slug && !relatedArticles.includes(a)).slice(0, 2 - relatedArticles.length)
   : [];
 const displayedArticles = [...relatedArticles, ...otherArticles];
 
-// Formater la date
 const formattedDate = new Date(article.date).toLocaleDateString('fr-FR', {
   day: 'numeric',
   month: 'long',
@@ -45,19 +43,6 @@ const structuredData = generateArticleSchema({
   date: article.date,
   slug: article.slug
 });
-
-// Contenu lorem ipsum structure
-const loremContent = `
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-
-Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-
-Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-`;
 ---
 
 <BaseLayout
@@ -98,73 +83,14 @@ Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, ad
     <div class="article-content">
       <div class="container">
         <div class="content-grid">
-          <div class="main-content">
-            <h2>Introduction</h2>
-            <p>{loremContent}</p>
-
-            <h2>Les points essentiels</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-              euismod ultrices ante, ac laoreet nulla vestibulum vel. Donec
-              sagittis justo vel risus fermentum, id tincidunt nunc ultricies.
-            </p>
-
-            <ul>
-              <li>Premier point important a considerer pour votre projet</li>
-              <li>Deuxieme element cle a ne pas negliger</li>
-              <li>Troisieme aspect essentiel pour la reussite</li>
-              <li>Quatrieme facteur determinant dans le processus</li>
-              <li>Cinquieme recommandation de nos experts</li>
-            </ul>
-
-            <h2>Notre expertise</h2>
-            <p>
-              Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-              posuere cubilia curae. Nullam quis risus eget urna mollis ornare
-              vel eu leo. Cras mattis consectetur purus sit amet fermentum.
-            </p>
-
-            <blockquote>
-              "En tant que couvreur professionnel depuis plus de 15 ans, nous
-              recommandons de faire appel a un artisan qualifie pour tous vos
-              travaux de toiture."
-            </blockquote>
-
-            <h2>Conseils pratiques</h2>
-            <p>
-              Maecenas faucibus mollis interdum. Nullam id dolor id nibh
-              ultricies vehicula ut id elit. Cras justo odio, dapibus ac
-              facilisis in, egestas eget quam.
-            </p>
-
-            <ol>
-              <li>Evaluez l'etat actuel de votre toiture</li>
-              <li>Identifiez les problemes potentiels</li>
-              <li>Consultez un professionnel pour un diagnostic</li>
-              <li>Comparez plusieurs devis detailles</li>
-              <li>Planifiez les travaux au bon moment</li>
-            </ol>
-
-            <h2>Conclusion</h2>
-            <p>
-              Integer posuere erat a ante venenatis dapibus posuere velit
-              aliquet. Donec id elit non mi porta gravida at eget metus.
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-            </p>
-
-            <p>
-              Pour toute question ou pour obtenir un devis gratuit, n'hesitez
-              pas a nous contacter. Notre equipe d'experts est a votre
-              disposition pour vous accompagner dans votre projet.
-            </p>
-          </div>
+          <div class="main-content" set:html={article.content} />
 
           <aside class="article-sidebar">
             <div class="sidebar-box">
               <h3>Besoin d'un expert ?</h3>
               <p>
-                Nos couvreurs professionnels sont a votre disposition pour
-                evaluer vos besoins et vous proposer un devis gratuit.
+                Nos couvreurs professionnels interviennent a Dunkerque
+                et sur tout le littoral nord.
               </p>
               <Button href="tel:+33328000000" variant="primary" fullWidth={true}>
                 Appeler maintenant
@@ -183,6 +109,16 @@ Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, ad
                 <li><a href="/services/zinguerie/">Zinguerie</a></li>
                 <li><a href="/services/isolation/">Isolation</a></li>
                 <li><a href="/services/urgence/">Urgence 24/7</a></li>
+              </ul>
+            </div>
+
+            <div class="sidebar-box sidebar-zones">
+              <h3>Zones d'intervention</h3>
+              <ul>
+                <li><a href="/zones/dunkerque/">Dunkerque</a></li>
+                <li><a href="/zones/calais/">Calais</a></li>
+                <li><a href="/zones/gravelines/">Gravelines</a></li>
+                <li><a href="/zones/grande-synthe/">Grande-Synthe</a></li>
               </ul>
             </div>
           </aside>
@@ -217,8 +153,7 @@ Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, ad
       <div class="article-cta">
         <h2>Un projet de toiture ?</h2>
         <p>
-          Contactez-nous pour un devis gratuit et personnalise.
-          Notre equipe vous repond sous 24h.
+          Contactez-nous pour un devis gratuit. Reponse sous 24h.
         </p>
         <div class="cta-buttons">
           <Button href="tel:+33328000000" variant="primary" size="lg">
@@ -289,46 +224,105 @@ Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, ad
 
   .content-grid {
     display: grid;
-    grid-template-columns: 1fr 350px;
+    grid-template-columns: 1fr 320px;
     gap: var(--spacing-3xl);
     align-items: start;
   }
 
-  .main-content h2 {
+  /* Styles pour le contenu dynamique */
+  .main-content :global(h2) {
     font-size: var(--text-2xl);
     margin-top: var(--spacing-2xl);
     margin-bottom: var(--spacing-md);
+    color: var(--color-gray-900);
   }
 
-  .main-content h2:first-child {
+  .main-content :global(h2:first-child) {
     margin-top: 0;
   }
 
-  .main-content p {
+  .main-content :global(h3) {
+    font-size: var(--text-xl);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-gray-800);
+  }
+
+  .main-content :global(p) {
     color: var(--color-gray-700);
     line-height: 1.8;
     margin-bottom: var(--spacing-md);
   }
 
-  .main-content ul,
-  .main-content ol {
+  .main-content :global(ul),
+  .main-content :global(ol) {
     padding-left: var(--spacing-lg);
     margin-bottom: var(--spacing-lg);
   }
 
-  .main-content li {
+  .main-content :global(li) {
     color: var(--color-gray-700);
     line-height: 1.7;
     padding: var(--spacing-xs) 0;
   }
 
-  .main-content blockquote {
+  .main-content :global(strong) {
+    color: var(--color-gray-900);
+    font-weight: 600;
+  }
+
+  .main-content :global(blockquote) {
     border-left: 4px solid var(--color-secondary);
     padding-left: var(--spacing-lg);
     margin: var(--spacing-xl) 0;
     font-style: italic;
     color: var(--color-gray-600);
     font-size: var(--text-lg);
+  }
+
+  .main-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--spacing-xl) 0;
+    font-size: var(--text-sm);
+  }
+
+  .main-content :global(th),
+  .main-content :global(td) {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--color-gray-200);
+    text-align: left;
+  }
+
+  .main-content :global(th) {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: 600;
+  }
+
+  .main-content :global(tr:nth-child(even)) {
+    background-color: var(--color-gray-50);
+  }
+
+  .main-content :global(.info-box) {
+    background-color: var(--color-gray-50);
+    border-left: 4px solid var(--color-primary);
+    padding: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  }
+
+  .main-content :global(.info-box p) {
+    margin: 0;
+  }
+
+  .main-content :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .main-content :global(a:hover) {
+    color: var(--color-secondary);
   }
 
   .article-sidebar {
@@ -358,27 +352,32 @@ Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, ad
     margin-bottom: var(--spacing-sm);
   }
 
-  .sidebar-services ul {
+  .sidebar-services ul,
+  .sidebar-zones ul {
     list-style: none;
     padding: 0;
   }
 
-  .sidebar-services li {
+  .sidebar-services li,
+  .sidebar-zones li {
     padding: var(--spacing-sm) 0;
     border-bottom: 1px solid var(--color-gray-200);
   }
 
-  .sidebar-services li:last-child {
+  .sidebar-services li:last-child,
+  .sidebar-zones li:last-child {
     border-bottom: none;
   }
 
-  .sidebar-services a {
+  .sidebar-services a,
+  .sidebar-zones a {
     color: var(--color-gray-700);
     font-size: var(--text-sm);
     transition: color var(--transition-fast);
   }
 
-  .sidebar-services a:hover {
+  .sidebar-services a:hover,
+  .sidebar-zones a:hover {
     color: var(--color-primary);
   }
 
@@ -416,9 +415,6 @@ Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, ad
   .article-cta p {
     color: var(--color-gray-200);
     margin-bottom: var(--spacing-xl);
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
   }
 
   .cta-buttons {
