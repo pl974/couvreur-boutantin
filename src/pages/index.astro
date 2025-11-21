@@ -19,7 +19,8 @@ import ContactForm from '../components/ContactForm.astro';
 import Button from '../components/Button.astro';
 import CTAFloat from '../components/CTAFloat.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
-import { services, cities } from '../utils/seo';
+import { services, cities, blogArticles } from '../utils/seo';
+import BlogCard from '../components/BlogCard.astro';
 
 const faqItems = [
   {
@@ -269,6 +270,39 @@ const galleryItems = [
     </div>
   </section>
 
+  <!-- Section Blog -->
+  <section class="section blog-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Conseils et actualites toiture</h2>
+        <p>
+          Retrouvez nos guides pratiques et conseils d'experts pour entretenir
+          et reparer votre toiture.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        {blogArticles.slice(0, 3).map(article => (
+          <BlogCard
+            title={article.title}
+            excerpt={article.excerpt}
+            image={article.image}
+            href={`/blog/${article.slug}/`}
+            category={article.category}
+            date={article.date}
+            readTime={article.readTime}
+          />
+        ))}
+      </div>
+
+      <div class="section-cta">
+        <Button href="/blog/" variant="outline">
+          Voir tous les articles
+        </Button>
+      </div>
+    </div>
+  </section>
+
   <!-- Section Contact CTA -->
   <section class="section contact-section">
     <div class="container">
@@ -484,6 +518,11 @@ const galleryItems = [
   /* Section FAQ */
   .faq-section-wrapper {
     background-color: var(--color-white);
+  }
+
+  /* Section Blog */
+  .blog-section {
+    background-color: var(--color-gray-50);
   }
 
   /* Section Contact */
