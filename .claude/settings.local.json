@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node generate-images.js:*)",
+      "Bash(node optimize-images.js:*)",
+      "Bash(npm install:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nfeat: add complete image library with AI-generated WebP assets\n\nGenerate and optimize 26 professional images for the roofing website using Freepik API and Sharp:\n- 3 hero banner images showcasing roofing work in Dunkerque\n- 6 service images (repair, renovation, cleaning, zinc work, insulation, emergency)\n- 3 about images (craftsman, team, certifications)\n- 8 zone images (Dunkerque, Calais, Gravelines and surrounding areas)\n- 6 gallery images (before/after project showcases)\n\nAll images converted to WebP format with 70.3% size reduction (13MB → 3.9MB) for optimal SEO and page load performance.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
