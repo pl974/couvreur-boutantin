@@ -5,6 +5,7 @@
  */
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import FAQ from '../../components/FAQ.astro';
 import Button from '../../components/Button.astro';
@@ -323,6 +324,11 @@ const structuredData = generateServiceSchema({
   description={service.description}
   structuredData={structuredData}
 >
+  <Breadcrumb items={[
+    { label: 'Services', href: '/services/' },
+    { label: service.name }
+  ]} />
+
   <section class="page-header">
     <div class="page-header-bg" style={`background-image: url(${service.image})`}></div>
     <div class="page-header-overlay"></div>

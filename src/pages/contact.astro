@@ -5,6 +5,7 @@
  */
 
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 import ContactForm from '../components/ContactForm.astro';
 ---
 
@@ -12,6 +13,8 @@ import ContactForm from '../components/ContactForm.astro';
   title="Contact - Devis gratuit couvreur Dunkerque"
   description="Contactez Couvreur Boutantin pour un devis gratuit. Artisan couvreur a Dunkerque, intervention sur tout le littoral nord. Reponse sous 24h."
 >
+  <Breadcrumb items={[{ label: 'Contact' }]} />
+
   <section class="page-header">
     <div class="page-header-bg" style="background-image: url('/images/about/equipe-couvreurs.webp')"></div>
     <div class="page-header-overlay"></div>

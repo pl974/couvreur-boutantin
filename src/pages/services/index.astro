@@ -6,6 +6,7 @@
  */
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import ServiceCardImage from '../../components/ServiceCardImage.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import { services } from '../../utils/seo';
@@ -15,6 +16,8 @@ import { services } from '../../utils/seo';
   title="Services de couverture a Dunkerque"
   description="Decouvrez tous nos services de couverture a Dunkerque : reparation, renovation, demoussage, zinguerie, isolation. Artisan certifie RGE, devis gratuit."
 >
+  <Breadcrumb items={[{ label: 'Services' }]} />
+
   <section class="page-header">
     <div class="page-header-bg" style="background-image: url('/images/hero/hero-couvreur-travail.webp')"></div>
     <div class="page-header-overlay"></div>

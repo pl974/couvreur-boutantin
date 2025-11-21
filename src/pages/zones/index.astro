@@ -6,6 +6,7 @@
  */
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import CityCardImage from '../../components/CityCardImage.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import { cities } from '../../utils/seo';
@@ -15,6 +16,8 @@ import { cities } from '../../utils/seo';
   title="Zones d'intervention couvreur - Dunkerque et alentours"
   description="Couvreur intervenant sur Dunkerque, Calais, Gravelines, Grande-Synthe et tout le littoral nord. Reparation et renovation de toiture. Devis gratuit."
 >
+  <Breadcrumb items={[{ label: 'Zones d\'intervention' }]} />
+
   <section class="page-header">
     <div class="page-header-bg" style="background-image: url('/images/hero/hero-toiture-renovation.webp')"></div>
     <div class="page-header-overlay"></div>
