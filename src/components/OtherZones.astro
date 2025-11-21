@@ -1,0 +1,82 @@
+---
+/**
+ * Composant OtherZones - Maillage interne entre zones
+ * Affiche les autres zones d'intervention (exclut la zone courante)
+ * A utiliser sur les pages de zones pour renforcer le maillage
+ */
+
+import { cities } from '../utils/seo';
+
+interface Props {
+  currentSlug: string;
+  title?: string;
+}
+
+const { currentSlug, title = "Nous intervenons aussi a" } = Astro.props;
+
+const otherCities = cities.filter(city => city.slug !== currentSlug);
+---
+
+<section class="other-zones">
+  <div class="container">
+    <h2>{title}</h2>
+    <div class="zones-links">
+      {otherCities.map(city => (
+        <a href={`/zones/${city.slug}/`} class="zone-chip">
+          {city.name}
+          <span class="zone-postal">{city.postalCode}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .other-zones {
+    background-color: var(--color-gray-100);
+    padding: var(--spacing-xl) 0;
+  }
+
+  .other-zones h2 {
+    text-align: center;
+    font-size: var(--text-xl);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .zones-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-sm);
+  }
+
+  .zone-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-primary);
+    transition: all var(--transition-fast);
+  }
+
+  .zone-chip:hover {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .zone-postal {
+    font-size: var(--text-xs);
+    color: var(--color-gray-500);
+  }
+
+  .zone-chip:hover .zone-postal {
+    color: var(--color-gray-300);
+  }
+</style>

@@ -10,6 +10,7 @@ import ContactForm from '../../components/ContactForm.astro';
 import FAQ from '../../components/FAQ.astro';
 import Button from '../../components/Button.astro';
 import Gallery from '../../components/Gallery.astro';
+import OtherZones from '../../components/OtherZones.astro';
 import { cities, services, generateCitySchema } from '../../utils/seo';
 
 export function getStaticPaths() {
@@ -165,7 +166,7 @@ const structuredData = generateCitySchema({
           <h3>Nos services a {city.name}</h3>
 
           <div class="services-grid">
-            {services.slice(0, 4).map(service => (
+            {services.map(service => (
               <ServiceCard
                 title={service.name}
                 description={service.shortDescription}
@@ -255,6 +256,9 @@ const structuredData = generateCitySchema({
       <FAQ items={faqItems} title={`Questions frequentes - Couvreur a ${city.name}`} />
     </div>
   </section>
+
+  <!-- Maillage interne - Autres zones -->
+  <OtherZones currentSlug={city.slug} title="Nous intervenons aussi a" />
 
   <section class="section cta-section">
     <div class="container">

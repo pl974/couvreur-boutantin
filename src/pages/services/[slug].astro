@@ -11,6 +11,7 @@ import Button from '../../components/Button.astro';
 import Gallery from '../../components/Gallery.astro';
 import PriceRange from '../../components/PriceRange.astro';
 import ProcessSteps from '../../components/ProcessSteps.astro';
+import RelatedZones from '../../components/RelatedZones.astro';
 import { services, generateServiceSchema } from '../../utils/seo';
 
 export function getStaticPaths() {
@@ -477,6 +478,12 @@ const structuredData = generateServiceSchema({
       <FAQ items={faqItems} title={`Questions frequentes sur la ${service.name.toLowerCase()}`} />
     </div>
   </section>
+
+  <!-- Maillage interne - Zones d'intervention -->
+  <RelatedZones
+    title={`${service.name} dans le Nord`}
+    serviceName={`notre service de ${service.name.toLowerCase()}`}
+  />
 
   <section class="section cta-section">
     <div class="container">

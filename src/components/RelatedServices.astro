@@ -1,0 +1,120 @@
+---
+/**
+ * Composant RelatedServices - Maillage interne vers les services
+ * Affiche les services disponibles pour renforcer le SEO
+ * A utiliser sur les pages de zones
+ */
+
+import { services } from '../utils/seo';
+
+interface Props {
+  title?: string;
+  cityName?: string;
+}
+
+const {
+  title = "Nos services de couverture",
+  cityName = "votre commune"
+} = Astro.props;
+---
+
+<section class="related-services">
+  <div class="container">
+    <h2>{title}</h2>
+    <p class="related-intro">
+      Tous nos services de couverture sont disponibles a {cityName}.
+      Cliquez sur un service pour en savoir plus.
+    </p>
+    <div class="services-grid">
+      {services.map(service => (
+        <a href={`/services/${service.slug}/`} class="service-link">
+          <div class="service-icon" set:html={service.icon} />
+          <div class="service-info">
+            <span class="service-name">{service.name}</span>
+            <span class="service-desc">{service.shortDescription.slice(0, 60)}...</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .related-services {
+    background-color: var(--color-white);
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .related-services h2 {
+    text-align: center;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .related-intro {
+    text-align: center;
+    color: var(--color-gray-600);
+    margin-bottom: var(--spacing-xl);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  .service-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    background-color: var(--color-gray-50);
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+
+  .service-link:hover {
+    border-color: var(--color-primary);
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-md);
+  }
+
+  .service-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    color: var(--color-secondary);
+  }
+
+  .service-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .service-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .service-name {
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .service-desc {
+    font-size: var(--text-sm);
+    color: var(--color-gray-500);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 768px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
