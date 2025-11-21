@@ -323,6 +323,8 @@ const structuredData = generateServiceSchema({
   structuredData={structuredData}
 >
   <section class="page-header">
+    <div class="page-header-bg" style={`background-image: url(${service.image})`}></div>
+    <div class="page-header-overlay"></div>
     <div class="container">
       <div class="header-content">
         <div class="service-icon" set:html={service.icon} />
@@ -345,7 +347,7 @@ const structuredData = generateServiceSchema({
     <div class="container">
       <div class="service-image-wrapper">
         <img
-          src={`/images/services/service-${service.slug}.webp`}
+          src={service.image}
           alt={`${service.name} a Dunkerque - Couvreur Boutantin`}
           width="1200"
           height="600"
@@ -518,10 +520,33 @@ const structuredData = generateServiceSchema({
   }
 
   .page-header {
-    background-color: var(--color-primary);
+    position: relative;
     color: var(--color-white);
     padding: var(--spacing-3xl) 0;
     text-align: center;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+  }
+
+  .page-header-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+
+  .page-header-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(30, 58, 95, 0.92) 0%, rgba(30, 58, 95, 0.85) 100%);
+    z-index: 1;
+  }
+
+  .page-header .container {
+    position: relative;
+    z-index: 2;
   }
 
   .header-content {

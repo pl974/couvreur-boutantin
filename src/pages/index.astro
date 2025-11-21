@@ -8,9 +8,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import TrustBadges from '../components/TrustBadges.astro';
 import Stats from '../components/Stats.astro';
-import ServiceCard from '../components/ServiceCard.astro';
+import ServiceCardImage from '../components/ServiceCardImage.astro';
 import ProcessSteps from '../components/ProcessSteps.astro';
-import CityCard from '../components/CityCard.astro';
+import CityCardImage from '../components/CityCardImage.astro';
 import Gallery from '../components/Gallery.astro';
 import Testimonial from '../components/Testimonial.astro';
 import PriceRange from '../components/PriceRange.astro';
@@ -118,11 +118,12 @@ const galleryItems = [
 
       <div class="grid grid-3">
         {services.slice(0, 6).map(service => (
-          <ServiceCard
+          <ServiceCardImage
             title={service.name}
             description={service.shortDescription}
-            icon={service.icon}
+            image={service.image}
             href={`/services/${service.slug}/`}
+            badge={service.badge}
           />
         ))}
       </div>
@@ -186,6 +187,15 @@ const galleryItems = [
             height="400"
             loading="lazy"
           />
+          <div class="certification-badge">
+            <img
+              src="/images/about/certification-rge.webp"
+              alt="Certification RGE Qualibat - Reconnu Garant de l'Environnement"
+              width="120"
+              height="120"
+              loading="lazy"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -207,9 +217,10 @@ const galleryItems = [
 
       <div class="grid grid-2">
         {cities.slice(0, 6).map(city => (
-          <CityCard
+          <CityCardImage
             name={city.name}
             description={city.shortDescription}
+            image={city.image}
             href={`/zones/${city.slug}/`}
             postalCode={city.postalCode}
           />
@@ -432,15 +443,32 @@ const galleryItems = [
   }
 
   .why-image {
+    position: relative;
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-xl);
   }
 
-  .why-image img {
+  .why-image > img {
     width: 100%;
     height: auto;
     object-fit: cover;
+  }
+
+  .certification-badge {
+    position: absolute;
+    bottom: var(--spacing-lg);
+    right: var(--spacing-lg);
+    background-color: var(--color-white);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .certification-badge img {
+    display: block;
+    width: 100px;
+    height: auto;
   }
 
   /* Section Zones */

@@ -106,6 +106,8 @@ const structuredData = generateCitySchema({
   structuredData={structuredData}
 >
   <section class="page-header">
+    <div class="page-header-bg" style={`background-image: url(${city.image})`}></div>
+    <div class="page-header-overlay"></div>
     <div class="container">
       <div class="header-content">
         <span class="city-badge">{city.postalCode}</span>
@@ -128,7 +130,7 @@ const structuredData = generateCitySchema({
     <div class="container">
       <div class="city-image-wrapper">
         <img
-          src={`/images/zones/${city.slug}-ville.webp`}
+          src={city.image}
           alt={`${city.name} - Zone d'intervention Couvreur Boutantin`}
           width="1200"
           height="500"
@@ -312,10 +314,33 @@ const structuredData = generateCitySchema({
   }
 
   .page-header {
-    background-color: var(--color-primary);
+    position: relative;
     color: var(--color-white);
     padding: var(--spacing-3xl) 0;
     text-align: center;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+  }
+
+  .page-header-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+
+  .page-header-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(30, 58, 95, 0.92) 0%, rgba(30, 58, 95, 0.85) 100%);
+    z-index: 1;
+  }
+
+  .page-header .container {
+    position: relative;
+    z-index: 2;
   }
 
   .header-content {
