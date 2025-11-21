@@ -1,0 +1,381 @@
+---
+/**
+ * Page Temoignages
+ * Avis clients avec schema Review pour rich snippets
+ * Important pour E-E-A-T et preuve sociale
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import Button from '../components/Button.astro';
+import { testimonials, generateReviewSchema } from '../utils/seo';
+
+// Schema Review pour les avis
+const reviewSchema = generateReviewSchema(testimonials);
+
+// Calculer la note moyenne
+const avgRating = (testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length).toFixed(1);
+---
+
+<BaseLayout
+  title="Avis clients - Temoignages couvreur Dunkerque"
+  description="Decouvrez les avis de nos clients sur nos travaux de toiture a Dunkerque. Note moyenne 4.9/5. Temoignages verifies de nos interventions."
+  structuredData={reviewSchema}
+>
+  <Breadcrumb items={[{ label: 'Temoignages' }]} />
+
+  <section class="page-header">
+    <div class="page-header-bg" style="background-image: url('/images/about/equipe-couvreurs.webp')"></div>
+    <div class="page-header-overlay"></div>
+    <div class="container">
+      <h1>Avis de nos clients</h1>
+      <p>
+        La satisfaction de nos clients est notre priorite. Decouvrez leurs
+        temoignages sur nos prestations de couverture.
+      </p>
+    </div>
+  </section>
+
+  <!-- Note globale -->
+  <section class="rating-summary">
+    <div class="container">
+      <div class="rating-box">
+        <div class="rating-score">
+          <span class="score-value">{avgRating}</span>
+          <span class="score-max">/5</span>
+        </div>
+        <div class="rating-stars">
+          {Array(5).fill(0).map((_, i) => (
+            <svg
+              class="star filled"
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          ))}
+        </div>
+        <div class="rating-count">
+          Base sur {testimonials.length} avis verifies
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Liste des temoignages -->
+  <section class="section">
+    <div class="container">
+      <div class="testimonials-grid">
+        {testimonials.map(testimonial => (
+          <TestimonialCard
+            name={testimonial.name}
+            location={testimonial.location}
+            date={testimonial.date}
+            rating={testimonial.rating}
+            title={testimonial.title}
+            text={testimonial.text}
+            service={testimonial.service}
+            image={testimonial.image}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Pourquoi nous faire confiance -->
+  <section class="section trust-section">
+    <div class="container">
+      <div class="section-intro">
+        <h2>Pourquoi nous faire confiance</h2>
+        <p>
+          Depuis plus de 15 ans, nous mettons tout en oeuvre pour satisfaire
+          nos clients a Dunkerque et dans tout le littoral nord.
+        </p>
+      </div>
+
+      <div class="trust-grid">
+        <div class="trust-card">
+          <div class="trust-number">+300</div>
+          <div class="trust-label">Chantiers par an</div>
+        </div>
+        <div class="trust-card">
+          <div class="trust-number">98%</div>
+          <div class="trust-label">Clients satisfaits</div>
+        </div>
+        <div class="trust-card">
+          <div class="trust-number">15+</div>
+          <div class="trust-label">Annees d'experience</div>
+        </div>
+        <div class="trust-card">
+          <div class="trust-number">24h</div>
+          <div class="trust-label">Delai de reponse</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA laisser un avis -->
+  <section class="section review-cta-section">
+    <div class="container">
+      <div class="review-cta">
+        <div class="review-cta-content">
+          <h2>Vous etes client ?</h2>
+          <p>
+            Votre avis compte ! Partagez votre experience avec nos services
+            pour aider d'autres proprietaires a faire leur choix.
+          </p>
+        </div>
+        <div class="review-cta-action">
+          <Button href="/contact/" variant="outline" size="lg">
+            Laisser un avis
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section cta-section">
+    <div class="container">
+      <div class="page-cta">
+        <h2>Rejoignez nos clients satisfaits</h2>
+        <p>
+          Contactez-nous pour un devis gratuit et decouvrez pourquoi
+          nos clients nous recommandent.
+        </p>
+        <div class="cta-buttons">
+          <Button href="tel:+33328000000" variant="primary" size="lg">
+            Appeler le 03 28 00 00 00
+          </Button>
+          <Button href="/contact/" variant="secondary" size="lg">
+            Demander un devis
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    position: relative;
+    color: var(--color-white);
+    padding: var(--spacing-3xl) 0;
+    text-align: center;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+  }
+
+  .page-header-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+
+  .page-header-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(30, 58, 95, 0.92) 0%, rgba(30, 58, 95, 0.85) 100%);
+    z-index: 1;
+  }
+
+  .page-header .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .page-header h1 {
+    color: var(--color-white);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .page-header p {
+    color: var(--color-gray-200);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Rating Summary */
+  .rating-summary {
+    background-color: var(--color-white);
+    padding: var(--spacing-2xl) 0;
+    margin-top: calc(var(--spacing-xl) * -1);
+    position: relative;
+    z-index: 2;
+  }
+
+  .rating-box {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: var(--color-gray-50);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+  }
+
+  .rating-score {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .score-value {
+    font-size: var(--text-5xl);
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .score-max {
+    font-size: var(--text-2xl);
+    color: var(--color-gray-400);
+  }
+
+  .rating-stars {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .star.filled {
+    color: var(--color-secondary);
+  }
+
+  .rating-count {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+  }
+
+  /* Testimonials Grid */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xl);
+  }
+
+  /* Trust Section */
+  .trust-section {
+    background-color: var(--color-gray-50);
+  }
+
+  .section-intro {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto var(--spacing-2xl);
+  }
+
+  .section-intro h2 {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section-intro p {
+    color: var(--color-gray-600);
+  }
+
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  .trust-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .trust-number {
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .trust-label {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+  }
+
+  /* Review CTA */
+  .review-cta-section {
+    background-color: var(--color-white);
+  }
+
+  .review-cta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-gray-50);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl) var(--spacing-2xl);
+  }
+
+  .review-cta-content h2 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .review-cta-content p {
+    color: var(--color-gray-600);
+    margin: 0;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background-color: var(--color-primary);
+  }
+
+  .page-cta {
+    text-align: center;
+    color: var(--color-white);
+  }
+
+  .page-cta h2 {
+    color: var(--color-white);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .page-cta p {
+    color: var(--color-gray-200);
+    margin-bottom: var(--spacing-xl);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 1024px) {
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .trust-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .review-cta {
+      flex-direction: column;
+      text-align: center;
+      gap: var(--spacing-lg);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .trust-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

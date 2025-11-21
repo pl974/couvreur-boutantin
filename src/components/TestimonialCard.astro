@@ -1,0 +1,213 @@
+---
+/**
+ * Composant TestimonialCard
+ * Carte de temoignage client detaillee
+ * Affiche note, avis, service et date
+ */
+
+interface Props {
+  name: string;
+  location: string;
+  date: string;
+  rating: number;
+  title: string;
+  text: string;
+  service: string;
+  image?: string;
+}
+
+const { name, location, date, rating, title, text, service, image } = Astro.props;
+
+// Formater la date
+const formattedDate = new Date(date).toLocaleDateString('fr-FR', {
+  month: 'long',
+  year: 'numeric'
+});
+
+// Generer les etoiles
+const stars = Array(5).fill(0).map((_, i) => i < rating);
+---
+
+<article class="testimonial-card">
+  {image && (
+    <div class="testimonial-image">
+      <img src={image} alt={`Realisation pour ${name}`} width="400" height="200" loading="lazy" />
+    </div>
+  )}
+
+  <div class="testimonial-content">
+    <div class="testimonial-rating">
+      {stars.map(filled => (
+        <svg
+          class={`star ${filled ? 'filled' : ''}`}
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill={filled ? 'currentColor' : 'none'}
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+      ))}
+      <span class="rating-text">{rating}/5</span>
+    </div>
+
+    <h3 class="testimonial-title">{title}</h3>
+
+    <blockquote class="testimonial-text">
+      "{text}"
+    </blockquote>
+
+    <div class="testimonial-meta">
+      <div class="testimonial-author">
+        <div class="author-avatar">
+          {name.charAt(0)}
+        </div>
+        <div class="author-info">
+          <span class="author-name">{name}</span>
+          <span class="author-location">{location}</span>
+        </div>
+      </div>
+
+      <div class="testimonial-details">
+        <span class="testimonial-service">{service}</span>
+        <span class="testimonial-date">{formattedDate}</span>
+      </div>
+    </div>
+  </div>
+</article>
+
+<style>
+  .testimonial-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .testimonial-image {
+    overflow: hidden;
+  }
+
+  .testimonial-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    transition: transform var(--transition-base);
+  }
+
+  .testimonial-card:hover .testimonial-image img {
+    transform: scale(1.05);
+  }
+
+  .testimonial-content {
+    padding: var(--spacing-lg);
+  }
+
+  .testimonial-rating {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .star {
+    color: var(--color-gray-300);
+  }
+
+  .star.filled {
+    color: var(--color-secondary);
+  }
+
+  .rating-text {
+    margin-left: var(--spacing-sm);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-gray-600);
+  }
+
+  .testimonial-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .testimonial-text {
+    font-size: var(--text-base);
+    color: var(--color-gray-600);
+    line-height: 1.7;
+    font-style: italic;
+    margin: 0 0 var(--spacing-lg);
+    padding: 0;
+    border: none;
+  }
+
+  .testimonial-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-gray-100);
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .author-avatar {
+    width: 44px;
+    height: 44px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: var(--text-lg);
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .author-name {
+    font-weight: 600;
+    color: var(--color-gray-900);
+    font-size: var(--text-sm);
+  }
+
+  .author-location {
+    font-size: var(--text-xs);
+    color: var(--color-gray-500);
+  }
+
+  .testimonial-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
+
+  .testimonial-service {
+    font-size: var(--text-xs);
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+
+  .testimonial-date {
+    font-size: var(--text-xs);
+    color: var(--color-gray-400);
+  }
+</style>

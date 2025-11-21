@@ -223,3 +223,269 @@ export const cities = [
     image: '/images/zones/toiture-flamande.webp'
   }
 ];
+
+/**
+ * Articles de blog pour le referencement longue traine
+ */
+export const blogArticles = [
+  {
+    slug: 'comment-reparer-fuite-toiture',
+    title: 'Comment reparer une fuite de toiture ?',
+    description: 'Guide complet pour identifier et reparer une fuite de toiture. Conseils de professionnels et etapes a suivre.',
+    excerpt: 'Decouvrez les etapes essentielles pour identifier l\'origine d\'une fuite et les solutions pour reparer votre toiture efficacement.',
+    image: '/images/services/service-reparation.webp',
+    category: 'Reparation',
+    date: '2024-11-15',
+    readTime: '7 min'
+  },
+  {
+    slug: 'prix-renovation-toiture-2024',
+    title: 'Prix renovation toiture en 2024 : guide complet',
+    description: 'Tous les prix pour renover votre toiture en 2024. Tarifs au m2 selon les materiaux et types de travaux.',
+    excerpt: 'Quel budget prevoir pour renover votre toiture ? Decouvrez les tarifs moyens au m2 selon le type de couverture et les travaux.',
+    image: '/images/services/service-renovation.webp',
+    category: 'Renovation',
+    date: '2024-11-10',
+    readTime: '10 min'
+  },
+  {
+    slug: 'quand-demousser-toiture',
+    title: 'Quand et pourquoi demousser sa toiture ?',
+    description: 'Tout savoir sur le demoussage de toiture : frequence, signes d\'alerte et benefices pour votre couverture.',
+    excerpt: 'Le demoussage est essentiel pour prolonger la vie de votre toiture. Apprenez a reconnaitre les signes et la bonne frequence.',
+    image: '/images/services/service-demoussage.webp',
+    category: 'Entretien',
+    date: '2024-11-05',
+    readTime: '5 min'
+  },
+  {
+    slug: 'aides-isolation-toiture-2024',
+    title: 'Aides isolation toiture 2024 : MaPrimeRenov et CEE',
+    description: 'Guide des aides financieres pour l\'isolation de toiture en 2024. MaPrimeRenov, CEE, eco-PTZ expliques.',
+    excerpt: 'Beneficiez des aides de l\'Etat pour isoler votre toiture. Decouvrez les montants et conditions pour MaPrimeRenov et les CEE.',
+    image: '/images/services/service-isolation.webp',
+    category: 'Isolation',
+    date: '2024-10-28',
+    readTime: '8 min'
+  },
+  {
+    slug: 'entretien-gouttieres-guide',
+    title: 'Entretien des gouttieres : le guide complet',
+    description: 'Comment entretenir vos gouttieres pour eviter les problemes. Nettoyage, verification et remplacement.',
+    excerpt: 'Des gouttieres bien entretenues protegent votre maison. Suivez notre guide pour un entretien efficace et preventif.',
+    image: '/images/services/service-zinguerie.webp',
+    category: 'Zinguerie',
+    date: '2024-10-20',
+    readTime: '6 min'
+  }
+];
+
+/**
+ * Temoignages clients pour la page dediee
+ */
+export const testimonials = [
+  {
+    id: 1,
+    name: 'Pierre Dumont',
+    location: 'Dunkerque',
+    date: '2024-10-15',
+    rating: 5,
+    title: 'Intervention rapide et professionnelle',
+    text: 'Suite a une fuite importante apres la tempete, l\'equipe de Couvreur Boutantin est intervenue en urgence. Le travail a ete realise rapidement et proprement. Je recommande vivement leurs services.',
+    service: 'Reparation toiture',
+    image: '/images/gallery/realisation-01-apres.webp'
+  },
+  {
+    id: 2,
+    name: 'Marie Lefebvre',
+    location: 'Calais',
+    date: '2024-09-28',
+    rating: 5,
+    title: 'Renovation complete reussie',
+    text: 'Tres satisfaite de la renovation complete de ma toiture. L\'equipe a respecte les delais annonces, le chantier est reste propre et le resultat est impeccable. Excellent rapport qualite-prix.',
+    service: 'Renovation toiture',
+    image: '/images/gallery/realisation-01-apres.webp'
+  },
+  {
+    id: 3,
+    name: 'Jean-Marc Bernard',
+    location: 'Grande-Synthe',
+    date: '2024-09-10',
+    rating: 5,
+    title: 'Demoussage impeccable',
+    text: 'Demoussage et traitement hydrofuge realises avec soin. Ma toiture a retrouve son aspect d\'origine. L\'equipe est tres professionnelle et les conseils d\'entretien tres utiles.',
+    service: 'Demoussage',
+    image: '/images/gallery/realisation-02-apres.webp'
+  },
+  {
+    id: 4,
+    name: 'Sophie Martin',
+    location: 'Gravelines',
+    date: '2024-08-22',
+    rating: 5,
+    title: 'Isolation performante',
+    text: 'Isolation des combles realisee par des professionnels competents. L\'accompagnement pour les aides MaPrimeRenov a ete tres apprecie. On ressent deja la difference en termes de confort.',
+    service: 'Isolation',
+    image: '/images/services/service-isolation.webp'
+  },
+  {
+    id: 5,
+    name: 'Philippe Rousseau',
+    location: 'Coudekerque-Branche',
+    date: '2024-08-05',
+    rating: 5,
+    title: 'Zinguerie de qualite',
+    text: 'Remplacement complet des gouttieres en zinc. Travail soigne, finitions parfaites. L\'artisan a pris le temps d\'expliquer les travaux et de repondre a toutes mes questions.',
+    service: 'Zinguerie',
+    image: '/images/gallery/realisation-03-apres.webp'
+  },
+  {
+    id: 6,
+    name: 'Isabelle Petit',
+    location: 'Saint-Pol-sur-Mer',
+    date: '2024-07-18',
+    rating: 5,
+    title: 'Service d\'urgence efficace',
+    text: 'Appel en urgence pour une fuite un dimanche soir. Intervention le lendemain matin pour bacher et securiser. Reparation definitive dans la semaine. Service reactif et fiable.',
+    service: 'Urgence toiture',
+    image: '/images/services/service-urgence.webp'
+  }
+];
+
+/**
+ * Realisations / Etudes de cas
+ */
+export const realisations = [
+  {
+    id: 1,
+    slug: 'renovation-maison-dunkerque-centre',
+    title: 'Renovation complete - Dunkerque centre',
+    description: 'Renovation totale de la toiture d\'une maison de ville dans le centre de Dunkerque. Remplacement integral de la couverture en tuiles.',
+    shortDescription: 'Maison de ville, renovation complete avec tuiles neuves',
+    client: 'M. et Mme Durand',
+    location: 'Dunkerque',
+    date: '2024-09',
+    duration: '2 semaines',
+    surface: '120 m2',
+    budget: '15 000 - 20 000',
+    services: ['Renovation toiture', 'Zinguerie'],
+    beforeImage: '/images/gallery/realisation-01-avant.webp',
+    afterImage: '/images/gallery/realisation-01-apres.webp',
+    gallery: [
+      '/images/gallery/realisation-01-avant.webp',
+      '/images/gallery/realisation-01-apres.webp'
+    ]
+  },
+  {
+    id: 2,
+    slug: 'demoussage-villa-calais',
+    title: 'Demoussage professionnel - Villa a Calais',
+    description: 'Nettoyage complet et traitement hydrofuge d\'une villa a Calais. Elimination des mousses et lichens avec protection longue duree.',
+    shortDescription: 'Villa individuelle, demoussage et traitement hydrofuge',
+    client: 'Mme Lefebvre',
+    location: 'Calais',
+    date: '2024-08',
+    duration: '2 jours',
+    surface: '180 m2',
+    budget: '2 500 - 3 500',
+    services: ['Demoussage'],
+    beforeImage: '/images/gallery/realisation-02-avant.webp',
+    afterImage: '/images/gallery/realisation-02-apres.webp',
+    gallery: [
+      '/images/gallery/realisation-02-avant.webp',
+      '/images/gallery/realisation-02-apres.webp'
+    ]
+  },
+  {
+    id: 3,
+    slug: 'zinguerie-gravelines',
+    title: 'Remplacement zinguerie - Gravelines',
+    description: 'Remplacement complet des gouttieres, descentes et faitages en zinc pour une maison a Gravelines.',
+    shortDescription: 'Maison individuelle, zinguerie complete en zinc',
+    client: 'M. Bernard',
+    location: 'Gravelines',
+    date: '2024-07',
+    duration: '3 jours',
+    surface: '45 ml',
+    budget: '4 000 - 5 500',
+    services: ['Zinguerie'],
+    beforeImage: '/images/gallery/realisation-03-avant.webp',
+    afterImage: '/images/gallery/realisation-03-apres.webp',
+    gallery: [
+      '/images/gallery/realisation-03-avant.webp',
+      '/images/gallery/realisation-03-apres.webp'
+    ]
+  }
+];
+
+/**
+ * Genere le schema Article pour un article de blog
+ */
+export function generateArticleSchema(article: {
+  title: string;
+  description: string;
+  image: string;
+  date: string;
+  slug: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": article.title,
+    "description": article.description,
+    "image": `https://couvreur-boutantin.fr${article.image}`,
+    "datePublished": article.date,
+    "dateModified": article.date,
+    "author": {
+      "@type": "Organization",
+      "name": "Couvreur Boutantin"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Couvreur Boutantin",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://couvreur-boutantin.fr/images/about/certification-rge.webp"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://couvreur-boutantin.fr/blog/${article.slug}/`
+    }
+  };
+}
+
+/**
+ * Genere le schema Review pour les temoignages
+ */
+export function generateReviewSchema(reviews: Array<{
+  name: string;
+  rating: number;
+  text: string;
+  date: string;
+}>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Couvreur Boutantin",
+    "review": reviews.map(review => ({
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": review.rating,
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": review.name
+      },
+      "reviewBody": review.text,
+      "datePublished": review.date
+    })),
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": reviews.length.toString()
+    }
+  };
+}

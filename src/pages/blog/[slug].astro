@@ -1,0 +1,454 @@
+---
+/**
+ * Template dynamique pour les articles de blog
+ * Genere une page pour chaque article
+ * Schema Article pour SEO
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import Button from '../../components/Button.astro';
+import { blogArticles, generateArticleSchema } from '../../utils/seo';
+
+export function getStaticPaths() {
+  return blogArticles.map(article => ({
+    params: { slug: article.slug },
+    props: { article }
+  }));
+}
+
+const { article } = Astro.props;
+
+// Articles similaires (meme categorie, exclure l'actuel)
+const relatedArticles = blogArticles
+  .filter(a => a.category === article.category && a.slug !== article.slug)
+  .slice(0, 2);
+
+// Si pas assez d'articles de meme categorie, completer avec d'autres
+const otherArticles = relatedArticles.length < 2
+  ? blogArticles.filter(a => a.slug !== article.slug && !relatedArticles.includes(a)).slice(0, 2 - relatedArticles.length)
+  : [];
+const displayedArticles = [...relatedArticles, ...otherArticles];
+
+// Formater la date
+const formattedDate = new Date(article.date).toLocaleDateString('fr-FR', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric'
+});
+
+const structuredData = generateArticleSchema({
+  title: article.title,
+  description: article.description,
+  image: article.image,
+  date: article.date,
+  slug: article.slug
+});
+
+// Contenu lorem ipsum structure
+const loremContent = `
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+
+Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+
+Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+`;
+---
+
+<BaseLayout
+  title={article.title}
+  description={article.description}
+  structuredData={structuredData}
+>
+  <Breadcrumb items={[
+    { label: 'Blog', href: '/blog/' },
+    { label: article.title }
+  ]} />
+
+  <article class="blog-article">
+    <header class="article-header">
+      <div class="container">
+        <div class="article-meta">
+          <span class="article-category">{article.category}</span>
+          <time datetime={article.date}>{formattedDate}</time>
+          <span class="article-readtime">{article.readTime} de lecture</span>
+        </div>
+        <h1>{article.title}</h1>
+        <p class="article-excerpt">{article.excerpt}</p>
+      </div>
+    </header>
+
+    <div class="article-image">
+      <div class="container">
+        <img
+          src={article.image}
+          alt={article.title}
+          width="1200"
+          height="600"
+          loading="eager"
+        />
+      </div>
+    </div>
+
+    <div class="article-content">
+      <div class="container">
+        <div class="content-grid">
+          <div class="main-content">
+            <h2>Introduction</h2>
+            <p>{loremContent}</p>
+
+            <h2>Les points essentiels</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+              euismod ultrices ante, ac laoreet nulla vestibulum vel. Donec
+              sagittis justo vel risus fermentum, id tincidunt nunc ultricies.
+            </p>
+
+            <ul>
+              <li>Premier point important a considerer pour votre projet</li>
+              <li>Deuxieme element cle a ne pas negliger</li>
+              <li>Troisieme aspect essentiel pour la reussite</li>
+              <li>Quatrieme facteur determinant dans le processus</li>
+              <li>Cinquieme recommandation de nos experts</li>
+            </ul>
+
+            <h2>Notre expertise</h2>
+            <p>
+              Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+              posuere cubilia curae. Nullam quis risus eget urna mollis ornare
+              vel eu leo. Cras mattis consectetur purus sit amet fermentum.
+            </p>
+
+            <blockquote>
+              "En tant que couvreur professionnel depuis plus de 15 ans, nous
+              recommandons de faire appel a un artisan qualifie pour tous vos
+              travaux de toiture."
+            </blockquote>
+
+            <h2>Conseils pratiques</h2>
+            <p>
+              Maecenas faucibus mollis interdum. Nullam id dolor id nibh
+              ultricies vehicula ut id elit. Cras justo odio, dapibus ac
+              facilisis in, egestas eget quam.
+            </p>
+
+            <ol>
+              <li>Evaluez l'etat actuel de votre toiture</li>
+              <li>Identifiez les problemes potentiels</li>
+              <li>Consultez un professionnel pour un diagnostic</li>
+              <li>Comparez plusieurs devis detailles</li>
+              <li>Planifiez les travaux au bon moment</li>
+            </ol>
+
+            <h2>Conclusion</h2>
+            <p>
+              Integer posuere erat a ante venenatis dapibus posuere velit
+              aliquet. Donec id elit non mi porta gravida at eget metus.
+              Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+            </p>
+
+            <p>
+              Pour toute question ou pour obtenir un devis gratuit, n'hesitez
+              pas a nous contacter. Notre equipe d'experts est a votre
+              disposition pour vous accompagner dans votre projet.
+            </p>
+          </div>
+
+          <aside class="article-sidebar">
+            <div class="sidebar-box">
+              <h3>Besoin d'un expert ?</h3>
+              <p>
+                Nos couvreurs professionnels sont a votre disposition pour
+                evaluer vos besoins et vous proposer un devis gratuit.
+              </p>
+              <Button href="tel:+33328000000" variant="primary" fullWidth={true}>
+                Appeler maintenant
+              </Button>
+              <Button href="/contact/" variant="outline" fullWidth={true}>
+                Demander un devis
+              </Button>
+            </div>
+
+            <div class="sidebar-box sidebar-services">
+              <h3>Nos services</h3>
+              <ul>
+                <li><a href="/services/reparation-toiture/">Reparation toiture</a></li>
+                <li><a href="/services/renovation-toiture/">Renovation toiture</a></li>
+                <li><a href="/services/demoussage/">Demoussage</a></li>
+                <li><a href="/services/zinguerie/">Zinguerie</a></li>
+                <li><a href="/services/isolation/">Isolation</a></li>
+                <li><a href="/services/urgence/">Urgence 24/7</a></li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  {displayedArticles.length > 0 && (
+    <section class="section related-articles">
+      <div class="container">
+        <h2>Articles similaires</h2>
+        <div class="related-grid">
+          {displayedArticles.map(related => (
+            <BlogCard
+              title={related.title}
+              excerpt={related.excerpt}
+              image={related.image}
+              slug={related.slug}
+              date={related.date}
+              category={related.category}
+              readTime={related.readTime}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section cta-section">
+    <div class="container">
+      <div class="article-cta">
+        <h2>Un projet de toiture ?</h2>
+        <p>
+          Contactez-nous pour un devis gratuit et personnalise.
+          Notre equipe vous repond sous 24h.
+        </p>
+        <div class="cta-buttons">
+          <Button href="tel:+33328000000" variant="primary" size="lg">
+            Appeler le 03 28 00 00 00
+          </Button>
+          <Button href="/contact/" variant="secondary" size="lg">
+            Formulaire de contact
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .article-header {
+    padding: var(--spacing-3xl) 0 var(--spacing-xl);
+    background-color: var(--color-gray-50);
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+  }
+
+  .article-category {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: var(--text-xs);
+  }
+
+  .article-header h1 {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--spacing-md);
+    max-width: 800px;
+  }
+
+  .article-excerpt {
+    font-size: var(--text-lg);
+    color: var(--color-gray-600);
+    max-width: 700px;
+    line-height: 1.7;
+  }
+
+  .article-image {
+    margin-top: calc(var(--spacing-xl) * -1);
+  }
+
+  .article-image img {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .article-content {
+    padding: var(--spacing-3xl) 0;
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: var(--spacing-3xl);
+    align-items: start;
+  }
+
+  .main-content h2 {
+    font-size: var(--text-2xl);
+    margin-top: var(--spacing-2xl);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .main-content h2:first-child {
+    margin-top: 0;
+  }
+
+  .main-content p {
+    color: var(--color-gray-700);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .main-content ul,
+  .main-content ol {
+    padding-left: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .main-content li {
+    color: var(--color-gray-700);
+    line-height: 1.7;
+    padding: var(--spacing-xs) 0;
+  }
+
+  .main-content blockquote {
+    border-left: 4px solid var(--color-secondary);
+    padding-left: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+    font-style: italic;
+    color: var(--color-gray-600);
+    font-size: var(--text-lg);
+  }
+
+  .article-sidebar {
+    position: sticky;
+    top: 100px;
+  }
+
+  .sidebar-box {
+    background-color: var(--color-gray-50);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .sidebar-box h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .sidebar-box p {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .sidebar-box :global(.btn) {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .sidebar-services ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sidebar-services li {
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--color-gray-200);
+  }
+
+  .sidebar-services li:last-child {
+    border-bottom: none;
+  }
+
+  .sidebar-services a {
+    color: var(--color-gray-700);
+    font-size: var(--text-sm);
+    transition: color var(--transition-fast);
+  }
+
+  .sidebar-services a:hover {
+    color: var(--color-primary);
+  }
+
+  .related-articles {
+    background-color: var(--color-gray-50);
+  }
+
+  .related-articles h2 {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xl);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .cta-section {
+    background-color: var(--color-primary);
+  }
+
+  .article-cta {
+    text-align: center;
+    color: var(--color-white);
+  }
+
+  .article-cta h2 {
+    color: var(--color-white);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .article-cta p {
+    color: var(--color-gray-200);
+    margin-bottom: var(--spacing-xl);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 1024px) {
+    .content-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .article-sidebar {
+      position: static;
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .article-header h1 {
+      font-size: var(--text-3xl);
+    }
+
+    .article-meta {
+      flex-wrap: wrap;
+    }
+  }
+</style>

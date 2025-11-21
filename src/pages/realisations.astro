@@ -1,0 +1,360 @@
+---
+/**
+ * Page Realisations
+ * Galerie des travaux realises avec etudes de cas
+ * Important pour E-E-A-T et la preuve sociale
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import RealisationCard from '../components/RealisationCard.astro';
+import Button from '../components/Button.astro';
+import { realisations } from '../utils/seo';
+
+// Trier par date (plus recent en premier)
+const sortedRealisations = [...realisations].sort((a, b) =>
+  new Date(b.date).getTime() - new Date(a.date).getTime()
+);
+---
+
+<BaseLayout
+  title="Nos realisations - Travaux de toiture Dunkerque"
+  description="Decouvrez nos realisations de toiture a Dunkerque et alentours. Photos avant/apres de renovations, reparations et demoussages. Artisan certifie RGE."
+>
+  <Breadcrumb items={[{ label: 'Realisations' }]} />
+
+  <section class="page-header">
+    <div class="page-header-bg" style="background-image: url('/images/gallery/realisation-01-apres.webp')"></div>
+    <div class="page-header-overlay"></div>
+    <div class="container">
+      <h1>Nos realisations</h1>
+      <p>
+        Decouvrez quelques exemples de nos travaux de toiture realises
+        a Dunkerque et dans le Nord. Chaque projet est unique et beneficie
+        de notre savoir-faire.
+      </p>
+    </div>
+  </section>
+
+  <!-- Compteurs -->
+  <section class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-number">+300</span>
+          <span class="stat-label">Chantiers par an</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">15+</span>
+          <span class="stat-label">Annees d'experience</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">98%</span>
+          <span class="stat-label">Clients satisfaits</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">Garantie decennale</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grille de realisations -->
+  <section class="section">
+    <div class="container">
+      <div class="section-intro">
+        <h2>Exemples de nos travaux</h2>
+        <p>
+          Chaque toiture est differente et necessite une approche sur mesure.
+          Voici quelques exemples de nos interventions recentes sur Dunkerque
+          et les communes environnantes.
+        </p>
+      </div>
+
+      <div class="realisations-grid">
+        {sortedRealisations.map(realisation => (
+          <RealisationCard
+            title={realisation.title}
+            shortDescription={realisation.shortDescription}
+            location={realisation.location}
+            beforeImage={realisation.beforeImage}
+            afterImage={realisation.afterImage}
+            services={realisation.services}
+            budget={realisation.budget}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Garanties -->
+  <section class="section guarantees-section">
+    <div class="container">
+      <div class="section-intro">
+        <h2>Nos garanties</h2>
+        <p>
+          Tous nos travaux sont realises dans les regles de l'art et
+          beneficient de garanties solides pour votre tranquillite.
+        </p>
+      </div>
+
+      <div class="guarantees-grid">
+        <div class="guarantee-card">
+          <div class="guarantee-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3>Garantie decennale</h3>
+          <p>
+            Tous nos travaux de couverture sont couverts par notre garantie
+            decennale, vous protegeant pendant 10 ans.
+          </p>
+        </div>
+
+        <div class="guarantee-card">
+          <div class="guarantee-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <h3>Certification RGE</h3>
+          <p>
+            Artisan certifie RGE Qualibat, garantissant la qualite de nos
+            interventions et l'acces aux aides financieres.
+          </p>
+        </div>
+
+        <div class="guarantee-card">
+          <div class="guarantee-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+          </div>
+          <h3>Assurance RC Pro</h3>
+          <p>
+            Notre assurance responsabilite civile professionnelle vous protege
+            en cas de dommage lors de nos interventions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section cta-section">
+    <div class="container">
+      <div class="page-cta">
+        <h2>Vous avez un projet de toiture ?</h2>
+        <p>
+          Contactez-nous pour discuter de votre projet. Nous vous proposons
+          un devis gratuit et personnalise sous 24h.
+        </p>
+        <div class="cta-buttons">
+          <Button href="tel:+33328000000" variant="primary" size="lg">
+            Appeler le 03 28 00 00 00
+          </Button>
+          <Button href="/contact/" variant="secondary" size="lg">
+            Demander un devis
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    position: relative;
+    color: var(--color-white);
+    padding: var(--spacing-3xl) 0;
+    text-align: center;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+  }
+
+  .page-header-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+
+  .page-header-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(30, 58, 95, 0.92) 0%, rgba(30, 58, 95, 0.85) 100%);
+    z-index: 1;
+  }
+
+  .page-header .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .page-header h1 {
+    color: var(--color-white);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .page-header p {
+    color: var(--color-gray-200);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Stats Bar */
+  .stats-bar {
+    background-color: var(--color-primary);
+    padding: var(--spacing-xl) 0;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-xl);
+    text-align: center;
+  }
+
+  .stat-item {
+    color: var(--color-white);
+  }
+
+  .stat-number {
+    display: block;
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .stat-label {
+    font-size: var(--text-sm);
+    color: var(--color-gray-200);
+  }
+
+  /* Section Intro */
+  .section-intro {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto var(--spacing-2xl);
+  }
+
+  .section-intro h2 {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section-intro p {
+    color: var(--color-gray-600);
+  }
+
+  /* Realisations Grid */
+  .realisations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-xl);
+  }
+
+  /* Guarantees Section */
+  .guarantees-section {
+    background-color: var(--color-gray-50);
+  }
+
+  .guarantees-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-xl);
+  }
+
+  .guarantee-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .guarantee-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--spacing-lg);
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+  }
+
+  .guarantee-card h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .guarantee-card p {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background-color: var(--color-primary);
+  }
+
+  .page-cta {
+    text-align: center;
+    color: var(--color-white);
+  }
+
+  .page-cta h2 {
+    color: var(--color-white);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .page-cta p {
+    color: var(--color-gray-200);
+    margin-bottom: var(--spacing-xl);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 1024px) {
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .realisations-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .guarantees-grid {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .stats-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-lg);
+    }
+
+    .realisations-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
